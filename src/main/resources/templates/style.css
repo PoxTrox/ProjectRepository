@@ -1,0 +1,42 @@
+.mainBody {
+    background: #302f2f;
+}
+
+.table-header {
+    background-color: #302f2f;
+    text-align: center;
+    flex: auto;
+    color: #d1d1d1;
+}
+
+.header-inner{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #d1d1d1;
+    text-align: left;
+    display: inline-block;
+}
+h1.table-header{
+
+    text-align: center;
+    color: #d1d1d1;
+
+}
+
+.footer {
+    text-align: center;
+    color: #d1d1d1;
+}
+.nav{
+    text-align: right;
+    padding: 50px 50px 50px 50px;
+}
+.btn{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 10px;
+    font-size: 15px;
+    color: #110d83;
+    background-color: #d1d1d1;
+    border: 5px solid #06450d;
+    margin: 5px;
+}
+
