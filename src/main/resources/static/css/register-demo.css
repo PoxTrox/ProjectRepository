@@ -1,0 +1,133 @@
+.register-body {
+
+    background: #302f2f;
+
+}
+
+.h1-text {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #2ecf40;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 50px 50px 50px;
+
+}
+
+.username {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    color: #2ecf40;
+    margin-top: 30px;
+}
+
+.username-label {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #af5a5a;
+
+}
+
+.password {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    color: #2ecf40;
+    margin-top: 30px;
+
+}
+
+.password-label {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #af5a5a;
+}
+
+.confirmPassword-label {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #af5a5a;
+}
+
+.confirm-password {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    color: #2ecf40;
+    margin-top: 30px;
+}
+
+.form-check {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-top: 10px;
+    font-size: 19px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    color: #2ecf40;
+}
+
+.btn-register {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #2ecf40;
+    background: #ffffff;
+    border-color: #2ecf40;
+    margin-top: 30px;
+}
+
+.form-already {
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    margin-top: 30px;
+    color: #2ecf40;
+}
+
+.already-login {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    color: #61a0d3;
+}
+
+.footer {
+    color: rgba(113, 156, 64, 0.69);
+    text-align: center;
+    margin-bottom: auto;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: large;
+    letter-spacing: 5px
+}
+
+
+

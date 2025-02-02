@@ -1,0 +1,77 @@
+.login {
+    background: #302f2f;
+}
+
+.login__container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.login__container--form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 50px 50px 50px;
+}
+.login__title{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #8bbd54;
+    text-align: center;
+    display: block;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    font-size: 30px;
+    font-weight: bold;
+}
+.login__field{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #d1d1d1;
+    text-align: center;
+    display: block;
+    font-size: 30px;
+}
+.form-label{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #6b9bc6;
+    text-align: center;
+    display: block;
+    font-size: 30px;
+}
+.form-control{
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #d1d1d1;
+    text-align: center;
+    display: block;
+    font-size: 30px;
+}
+.form-label{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #8bbd54;
+    text-align: left;
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+.form-control{
+    outline: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 40px;
+    color: #5c5c2c;
+}
+.form-check{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 35px;
+    color: #8bbd54;
+    margin-top:20px;
+}
+.div-footer {
+    color: rgba(113, 156, 64, 0.69);
+    text-align: center;
+    margin-bottom: auto;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: large;
+    letter-spacing: 5px
+}
