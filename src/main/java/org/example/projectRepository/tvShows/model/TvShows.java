@@ -1,4 +1,4 @@
-package org.example.projectRepository.serial.model;
+package org.example.projectRepository.tvShows.model;
 
 
 import jakarta.persistence.*;

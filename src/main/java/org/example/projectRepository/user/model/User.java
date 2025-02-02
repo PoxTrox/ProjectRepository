@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.example.projectRepository.book.model.Book;
 import org.example.projectRepository.movie.model.Movie;
-import org.example.projectRepository.serial.model.TvShows;
+import org.example.projectRepository.tvShows.model.TvShows;
 import org.example.projectRepository.wishList.model.WishList;
 
 

@@ -3,32 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Project Repository</title>
-    <link rel="stylesheet" type="text/css" href="/templates/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body class="mainBody">
 
+<div>
+    <nav class="nav">
+
+    <header>
+        <img class="Front-Image" src="/images/Screenshot%202025-01-31%20190230.png" alt="Logo Image">
+    </header>
+
+        <button class="btn" th:href="@{/login}" type="button">
+            <a th:href="@{/login}" class="button login">Login</a>
+        </button>
 
 
-
-<nav class="nav">
-
-
-    <button class="btn" th:href="@{/login.html}"  type="submit">Login</button>
-    <button  class="btn" th:href="@{/register.html}" type="submit">Register</button>
+        <button  class="btn" th:href="@{/register}" type="button">
+            <a th:href="@{/register}" class="button register">Register</a>
+        </button>
 
 
-</nav>
+    </nav>
+
+</div>
 
 <h1 class="table-header"> Your personal digital archive for books, movies and series.  </h1>
 
-
-
 <div class="header-inner">
 
-
-
     <article class="article">
-
+    <header class="header-inner-header">
         <h1 class="article-header">
             In today's dynamic daily life, filled with countless books, movies and series that grab our attention,
             it is often difficult to remember everything that we want to read or watch. And while the list of proposals grows,
@@ -39,15 +44,14 @@
             With such a solution, you can free yourself from the chaos of manual notes or forgotten titles by having easy access to your collection — neat,
             organized and always at hand. Let us turn your cultural plans into reality and never again lose track of the inspiring stories that await you.
         </h1>
-
-
+    </header>
     </article>
 
 
 
     <footer class="footer">
 
-            <div class="footer"><p>© 2025 Project Repository. All rights reserved.</p></div>
+            <div class="div-footer"><p>© 2025 Project Repository. All rights reserved.</p></div>
 
     </footer>
 

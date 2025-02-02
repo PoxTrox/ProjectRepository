@@ -17,14 +17,20 @@
 }
 h1.table-header{
 
-    text-align: center;
+    text-align: left;
     color: #d1d1d1;
+    margin: 40px 40px 40px 40px;
 
 }
 
-.footer {
+.div-footer {
+    color: rgba(113, 156, 64, 0.69);
     text-align: center;
-    color: #d1d1d1;
+    margin-bottom: auto;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: large;
+    letter-spacing: 5px
 }
 .nav{
     text-align: right;
@@ -35,8 +41,17 @@ h1.table-header{
     padding: 10px;
     font-size: 15px;
     color: #110d83;
-    background-color: #d1d1d1;
-    border: 5px solid #06450d;
+    background-color: #7adf87;
+    border: 5px solid #488f50;
     margin: 5px;
+    box-shadow: 2px 2px 5px #7adf87;
 }
+
+.Front-Image {
+    float: left;
+    width: 800px;
+    height: 400px;
+    border: 5px solid #171616;
+}
+
 
