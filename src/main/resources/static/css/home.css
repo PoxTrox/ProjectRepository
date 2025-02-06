@@ -1,0 +1,163 @@
+
+
+
+.navbar ul {
+    list-style-type: none;
+    background-color: hsl(0, 0%, 25%);
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    text-align: center;
+    font-size: 16px;
+}
+
+.navbar a:hover {
+    background-color: hsl(0, 0%, 10%);
+}
+
+
+.navbar li {
+
+    align-items: center;
+    text-align: center;
+    display: inline-flex;
+
+}
+
+.navbar li button {
+    background-color: hsl(0, 0%, 25%);
+    color: white;
+    margin: 15px;
+    padding: 15px;
+
+}
+
+.navbar li button:hover {
+    background-color:hsl(0, 0%, 10%);;
+}
+
+#timeItIs {
+    color: hsl(60, 38%, 3%);
+    position: absolute;
+    top: 90%;
+    left: 1%;
+
+    font-size: 30px;
+}
+
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown button {
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.dropdown a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+.dropdown .content {
+    display: none;
+    position: absolute;
+    background-color: hsl(55, 58%, 65%);
+    min-width: 100px;
+    box-shadow: 2px 2px 5px hsla(157, 50%, 55%, 0.8);
+}
+
+.dropdown:hover .content {
+    display: block;
+}
+
+.currentTime {
+    color: hsl(60, 38%, 3%);
+    text-align: center;
+}
+
+.dropdown:hover button {
+    background-color: hsl(0, 0%, 70%);
+}
+
+.dropdown a:hover {
+
+    background-color: hsl(0, 0%, 90%);
+}
+
+.Profile-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+.profile-img {
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.home {
+    background-color: hsl(0, 2%, 37%);
+}
+h2{
+   color: hsl(0, 14%, 85%);
+    margin:10px 20px 10px 20px;
+}
+
+.details-section-container {
+    display: flex;
+    align-items: baseline;
+    flex-direction: initial;
+    color: hsl(0, 14%, 85%);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    margin:10px 20px 10px 20px;
+}
+.LastAddedItem{
+    border: 1px solid hsl(0, 28%, 5%);
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    padding: 10px 10px 10px 10px;
+    margin-top: 50px;
+    margin-left: 450px;
+    align-items: initial;
+}
+tr{
+    color: hsl(210, 29%, 8%);
+    text-align: left;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    background-color: hsl(221, 22%, 75%);
+
+}
+.LastAddedItem td{
+    border: 1px solid hsl(0, 28%, 5%);
+    color: hsla(350, 93%, 33%, 0.89);
+    font-size:18px;
+}
+
+#h2Title{
+    position: absolute;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    top: 70%;
+    left: 20%;
+}
+
+

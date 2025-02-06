@@ -19,4 +19,10 @@ public class RegisterRequest {
     @Size(min = 5 , message = " Password must be at least 5 symbols")
     private String password;
 
+    @Size(min = 5 , message = " Confirm Password must be at least 5 symbols")
+    private String confirmPassword;
+
+
+    private boolean agreeTermOfUse;
+
 }

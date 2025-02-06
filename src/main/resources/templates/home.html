@@ -6,8 +6,104 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>HomePage</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
 </head>
-<body>
+<body class="home">
+<nav class="navbar">
+    <form>
+        <ul>
+            <li>
+                <a th:href="@{/EditProfile}" class="btn">Edit Profile</a>
+            </li>
+            <li>
+                <div class="dropdown">
+                    <button class="dropbtn">Media</button>
+                    <div class="content">
+                        <a href="#">Tv_Shows</a>
+                        <a href="#">Movies</a>
+                        <a href="#">Books</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a th:href="@{/MyWishList}" class="btn">My Wish List</a>
+            </li>
+            <li>
+                <a th:href="@{/messages}" class="btn">Messages</a>
+            </li>
+            <li>
+                <a th:href="@{/logout}" class="btn">Logout</a>
+
+            </li>
+
+        </ul>
+
+    </form>
+
+    <div class="currentTime">
+        <h3 id="timeItIs"></h3>
+    </div>
+</nav>
+<div class="Profile-section">
+    <img class="profile-img" src="/images/img.png" alt="Profile Picture"></img>
+</div>
+<h2>Additional info</h2>
+<div class="details-section-container">
+    <strong>Username: </strong>
+    <p th:text="${user.getUsername()}"></p>
+</div>
+<div class="details-section-container">
+    <strong>First name: </strong>
+    <p th:text="${ user.getFirstName()}"></p>
+</div>
+<div class="details-section-container">
+    <strong>Last name: </strong>
+    <p th:text="${user.getLastName()}"></p>
+</div>
+<div class="details-section-container">
+    <strong>Email address: </strong>
+    <p th:text="${user.email}"></p>
+</div>
+<div class="details-section-container">
+    <strong>Years old: </strong>
+    <p th:text="${user.age}"></p>
+</div>
+<div class="details-section-container">
+    <strong>Live in : </strong>
+    <p th:text="${user.country}"></p>
+</div>
+<br>
+<h2 id="h2Title">Last Added Item </h2>
+
+<div class="LastAddedItem">
+    <table>
+        <tr>
+            <th>Media_Type</th>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Seasons</th>
+            <th>Realise_Date</th>
+        </tr>
+        <tr>
+            <td>Movie</td>
+            <td>P2</td>
+            <td>Horror</td>
+            <td></td>
+            <td> 2007</td>
+
+        </tr>
+    </table>
+
+</div>
+
+<script>
+    let time = document.getElementById('timeItIs');
+
+    setInterval(() => {
+        let clock = new Date();
+        time.innerHTML = clock.toLocaleTimeString()
+    }, 1000)
+</script>
 
 
 </body>

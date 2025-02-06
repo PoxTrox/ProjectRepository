@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -36,12 +37,13 @@ public class UserService {
             throw new DomainException("Username or password are incorrect.");
         }
 
-        if (!byUsername.get().getPassword().equals(loginRequest.getPassword())) {
+        User user = byUsername.get();
+        if(!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
             throw new DomainException("Username or password are incorrect.");
         }
 
 
-        return byUsername.get();
+        return user;
     }
 
     @Transactional
@@ -56,7 +58,8 @@ public class UserService {
         }
         User newUSer = userRepository.save(initializeUser(registerRequest));
 
-        log.info("User {%s} registered.".formatted(user.get().getUsername()));
+
+        log.info("User {%s} registered.".formatted(newUSer.getUsername()));
 
         return newUSer;
 
@@ -70,5 +73,10 @@ public class UserService {
                 .role(UserRole.USER)
                 .build();
 
+    }
+
+    public User getById(UUID userId) {
+
+        return userRepository.findById(userId).orElseThrow(() -> new DomainException("User with id [%s] does not exist.".formatted(userId)));
     }
 }

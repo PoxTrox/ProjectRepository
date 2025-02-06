@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" th:href="@{/css/register-demo.css}">
+</head>
+<body class="register-body">
+
+
+    <!--/*@thymesVar id="RegisterRequest" type="org.example.projectRepository.web.dto.RegisterRequest"*/-->
+    <form class="form" th:action="@{/register}" th:method="post" th:object="${registerRequest}">
+
+        <h1 class="h1-text">Register</h1>
+
+        <div class="username">
+            <label for="username">Username</label>
+            <input type="text"  class="username-label" name="username" id="username" placeholder="Enter Username" th:field="*{username}" required>
+            <p class="alert-warning" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+        </div>
+
+        <div class="password">
+            <label for="Password">Password</label>
+            <input type="password"  class="password-label" name="Password" id="Password" placeholder="Enter Password" th:field="*{password}" required>
+            <p class="alert-warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+        </div>
+
+        <div class="confirm-password">
+            <label for="ConfirmPassword">Confirm Password</label>
+            <input type="password"  class="confirmPassword-label" name="ConfirmPassword" id="ConfirmPassword" placeholder="Enter CONFIRM PASSWORD" th:field="*{confirmPassword}" required>
+            <p class="alert-warning" th:if="${#fields.hasErrors('ConfirmPassword')}" th:errors="*{confirmPassword}"></p>
+
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input me-2" type="checkbox" value="checkbox" id="form2Example3c" placeholder="Please Agree aur terms" th:checked="*{agreeTermOfUse}" required/>
+            <label class="form-check-label" for="form2Example3c">
+                I agree all statements in <a href="#!">Terms of service</a>
+            </label>
+        </div>
+
+        <button class="btn-register">Register</button>
+
+        <p class="form-already">Already have an account? <a class="already-login" href="/login">Login</a>!</p>
+    </form>
+
+
+<footer class="footer">
+
+    <div class="footer"><p>© 2025 Project Repository. All rights reserved.</p></div>
+
+</footer>
+
+</body>
+</html>

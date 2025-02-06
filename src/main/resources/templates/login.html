@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" th:href="@{/css/loginDemo.css}">
+</head>
+<body class="login">
+<div class="login__container">
+
+    <!--/*@thymesVar id="loginRequest" type="org.example.projectRepository.web.dto.LoginRequest"*/-->
+    <form class="login__container--form" th:action="@{/login}" method="POST" th:object="${loginRequest}">
+        <div class="login__title">
+            <h1>Login</h1>
+        </div>
+        <div class="login__field">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter your Username" th:field="*{username}" required>
+            <p class="alert-warning" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+        </div>
+        <div class="login__field_password">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter your Password" th:field="*{password}" required>
+            <p class="alert-warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="checkbox1"/>
+            <label class="form-check-label" for="checkbox1">
+                Remember me
+            </label>
+            <button class="login__container--submit" type="submit">Log in</button>
+        </div>
+
+    </form>
+
+</div>
+<footer class="footer">
+
+    <div class="div-footer"><p>© 2025 Project Repository. All rights reserved.</p></div>
+
+</footer>
+
+
+</body>
+</html>

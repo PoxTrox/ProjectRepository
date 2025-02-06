@@ -13,13 +13,12 @@
     color: #2ecf40;
 }
 
-.register-form {
+.form{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 50px 50px 50px 50px;
-
 }
 
 .username {

@@ -1,5 +1,4 @@
-package org.example.projectRepository.tvShows.model;
-
+package org.example.projectRepository.media.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,27 +13,28 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class TvShows {
+public class Media {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private  UUID uuid;
 
     @Column(nullable = false)
     private String title;
 
     @Column(nullable = false)
-    private int season;
-
-
-    @Column(nullable = false)
     private LocalDate releaseDate;
 
+    @Column(nullable = false)
+    private int season;
 
     private String genre;
 
+    @Enumerated(EnumType.STRING)
+    private MediaType mediaType;
+
     @ManyToOne
     private User user;
+
 
 }

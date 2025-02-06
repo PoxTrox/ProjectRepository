@@ -75,3 +75,11 @@
     font-size: large;
     letter-spacing: 5px
 }
+.login__container--submit {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    padding: 20px 20px 20px 20px;
+    align-items: center;
+    color: #8bbd54}
+
+
