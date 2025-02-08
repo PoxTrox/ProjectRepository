@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
-    <link rel="stylesheet" th:href="@{/css/register-demo.css}">
+    <link rel="stylesheet"  th:href="@{/css/register.css}">
 </head>
-<body class="register-body">
+<body class="register-body" data-model-target="#register-bodyOverlay" id="register-bodyOverlay">
 
 
     <!--/*@thymesVar id="RegisterRequest" type="org.example.projectRepository.web.dto.RegisterRequest"*/-->
@@ -32,16 +32,20 @@
 
         </div>
 
+        <button type="submit" class="btn-register"  id="registerButton" disabled>  Register </button>
+
+
+        <p class="form-already">Already have an account? <a class="already-login" href="/login">Login</a>!</p>
+    </form >
+    <form class="TermOfUse" th:action="@{/TermsOfUse}" th:method="GET">
         <div class="form-check">
-            <input class="form-check-input me-2" type="checkbox" value="checkbox" id="form2Example3c" placeholder="Please Agree aur terms" th:checked="*{agreeTermOfUse}" required/>
-            <label class="form-check-label" for="form2Example3c">
-                I agree all statements in <a href="#!">Terms of service</a>
+            <input class="form-check-input me-2" type="checkbox" value="checkbox" id="checkBox" placeholder="Please Agree aur terms" required/>
+
+            <label class="form-check-label" for="checkBox" >
+                I agree all statements in <a id="termsLabel" th:href="@{TermOfUse}">Terms of service.</a>
             </label>
         </div>
 
-        <button class="btn-register">Register</button>
-
-        <p class="form-already">Already have an account? <a class="already-login" href="/login">Login</a>!</p>
     </form>
 
 
@@ -50,6 +54,16 @@
     <div class="footer"><p>© 2025 Project Repository. All rights reserved.</p></div>
 
 </footer>
+    <script>
+        function printThis (){
+            console.log("You must agree with our Term of use first")
+        }
+        document.getElementById("checkBox").addEventListener("change", function () {
+        printThis()
+            document.getElementById("registerButton").disabled = !this.checked;
+
+        });
+    </script>
 
 </body>
 </html>

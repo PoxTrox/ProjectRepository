@@ -99,7 +99,7 @@
     color: #2ecf40;
     background: #ffffff;
     border-color: #2ecf40;
-    margin-top: 30px;
+    margin-top: 80px;
 }
 
 .form-already {
@@ -108,7 +108,7 @@
     justify-content: center;
     align-items: center;
     font-size: 30px;
-    margin-top: 30px;
+    margin-top: 40px;
     color: #2ecf40;
 }
 
@@ -127,6 +127,21 @@
     font-size: large;
     letter-spacing: 5px
 }
+#termsLabel{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #a89b17;
+}
+.TermOfUse{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    justify-content: center;
 
 
+
+}
+.alert-warning {
+    text-align: center;
+    color: #a89b17;
+    font-size: 16px
+}
 

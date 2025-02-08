@@ -2,20 +2,22 @@
     background: #302f2f;
 }
 
-.login__container{
+.login__container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.login__container--form{
+
+.login__container--form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 50px 50px 50px 50px;
 }
-.login__title{
+
+.login__title {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: #8bbd54;
     text-align: center;
@@ -25,21 +27,24 @@
     font-size: 30px;
     font-weight: bold;
 }
-.login__field{
+
+.login__field {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: #d1d1d1;
     text-align: center;
     display: block;
     font-size: 30px;
 }
-.form-label{
+
+.form-label {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: #6b9bc6;
     text-align: center;
     display: block;
     font-size: 30px;
 }
-.form-control{
+
+.form-control {
 
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: #d1d1d1;
@@ -47,25 +52,29 @@
     display: block;
     font-size: 30px;
 }
-.form-label{
+
+.form-label {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: #8bbd54;
     text-align: left;
     font-size: 60px;
     margin-bottom: 10px;
 }
-.form-control{
+
+.form-control {
     outline: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 40px;
     color: #5c5c2c;
 }
-.form-check{
+
+.form-check {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 35px;
     color: #8bbd54;
-    margin-top:20px;
+    margin-top: 20px;
 }
+
 .div-footer {
     color: rgba(113, 156, 64, 0.69);
     text-align: center;
@@ -75,11 +84,16 @@
     font-size: large;
     letter-spacing: 5px
 }
+
 .login__container--submit {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 20px;
     padding: 20px 20px 20px 20px;
     align-items: center;
-    color: #8bbd54}
-
-
+    color: #8bbd54
+}
+.alert-warning {
+    text-align: center;
+    color: #a89b17;
+    font-size: 20px
+}

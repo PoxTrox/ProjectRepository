@@ -16,7 +16,7 @@ import java.util.UUID;
 @Component
 public class SessionCheckInterceptor implements HandlerInterceptor {
 
-    private final Set<String> UNAUTHORIZED_ENDPOINTS = Set.of("/", "/login", "/register");
+    private final Set<String> UNAUTHORIZED_ENDPOINTS = Set.of("/", "/login", "/register","/TermOfUse");
     private final Set<String>ADMIN_ENDPOINTS = Set.of("/users", "/reposts");
     private final UserService userService;
 

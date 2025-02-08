@@ -100,5 +100,11 @@ public class indexController {
         return "redirect:/login";
     }
 
+   @GetMapping ("/TermOfUse")
+    public ModelAndView getTermOfUsePage() {
+
+        return new ModelAndView("TermsOfUse");
+   }
+
 
 }
