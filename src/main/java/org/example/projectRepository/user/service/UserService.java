@@ -30,15 +30,13 @@ public class UserService  implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final BookService bookService;
-    private final AuthorService authorService;
+
 
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, BookService bookService, AuthorService authorService) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.bookService = bookService;
-        this.authorService = authorService;
+
     }
 
 
@@ -98,10 +96,5 @@ public class UserService  implements UserDetailsService {
         return new AuthenticationDetails(user.getId(),user.getUsername(),user.getPassword(),user.getRole(),user.isActive());
 
     }
-    public List<Book> returnTitleBookReversed () {
 
-
-
-        return null;
-    }
 }

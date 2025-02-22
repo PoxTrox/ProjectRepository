@@ -21,9 +21,19 @@
                 <div class="dropdown">
                     <button class="dropbtn">Sort by</button>
                     <div class="content">
-                        <a href="#">By author</a>
-                        <a href="#">by Title</a>
-                        <a href="#">by price</a>
+                        <a th:href="@{/books/get(sort='Author', direction=${direction == 'asc' ? 'desc' : 'asc'})}">by
+                            Author name  asc</a>
+                        <a th:href="@{/books/get(sort='Author', direction=${direction == 'desc' ? 'desc' : 'asc'})}">by
+                            Author name  desc</a>
+                        <a th:href="@{/books/get(sort='title', direction=${direction == 'asc' ? 'desc' : 'asc'})}">by
+                            Title asc</a>
+                        <a th:href="@{/books/get(sort='title', direction=${direction == 'desc' ? 'asc' : 'desc'})}">by
+                            Title desc</a>
+                        <a th:href="@{/books/get(sort='price', direction=${direction == 'asc' ? 'desc' : 'asc'})}">by
+                            price asc</a>
+                        <a th:href="@{/books/get(sort='price', direction=${direction == 'desc' ? 'asc' : 'desc'})}">by
+                            price desc</a>
+
                     </div>
                 </div>
             </li>
@@ -33,13 +43,27 @@
             <table id="tableBooks">
                 <tr>
                     <th>Title</th>
-                    <th th:href="@{/books/get/authorReversed}">Author</th>
+                    <th>Author</th>
                     <th>Price</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
-                <tr th:each="book : ${user.getBooks}">
+                <tr th:each="book : ${booksList}">
                     <td th:text="${book.title}"></td>
                     <td th:text="${book.author.firstName} +' '+  ${book.author.lastName}"></td>
                     <td th:text="${book.price}"></td>
+                    <td>
+                        <a th:href="@{'/books/' + ${book.id} + '/edit'}">Edit Book</a>
+                    </td>
+                    <td>
+                        <form th:action="@{'/books/' + ${book.id} + '/delete'}" method="POST">
+                            <input type="hidden" name="_method" value="delete"/>
+                            <input type="submit" value="Delete"/>
+                        </form>
+
+
+
+                    </td>
                 </tr>
             </table>
         </div>

@@ -1,13 +1,15 @@
 package org.example.projectRepository.web;
 
 import jakarta.validation.Valid;
-import org.example.projectRepository.author.service.AuthorService;
 import org.example.projectRepository.book.model.Book;
 import org.example.projectRepository.book.service.BookService;
 import org.example.projectRepository.security.AuthenticationDetails;
 import org.example.projectRepository.user.model.User;
 import org.example.projectRepository.user.service.UserService;
 import org.example.projectRepository.web.dto.BookAuthorRequest;
+import org.example.projectRepository.web.dto.BookEditRequest;
+import org.example.projectRepository.web.mapper.BookDtoMapper;
+import org.example.projectRepository.web.mapper.DtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -15,9 +17,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Comparator;
+
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.UUID;
+
 
 @Controller()
 @RequestMapping("/books")
@@ -25,25 +28,28 @@ public class BookController {
 
     private final UserService userService;
     private final BookService bookService;
-    private final AuthorService authorService;
 
     @Autowired
-    public BookController(UserService userService, BookService bookService, AuthorService authorService) {
+    public BookController(UserService userService, BookService bookService) {
         this.userService = userService;
         this.bookService = bookService;
-        this.authorService = authorService;
+
     }
 
 
     @GetMapping("/get")
-    public ModelAndView getBooksPage(@AuthenticationPrincipal AuthenticationDetails details) {
+    public ModelAndView getBooksPage(@AuthenticationPrincipal AuthenticationDetails details ,@RequestParam(name = "sort", defaultValue = "title") String sortField,
+                                     @RequestParam(name = "direction", defaultValue = "asc") String sortDirection) {
 
         ModelAndView mav = new ModelAndView();
 
         User user = userService.getById(details.getUserId());
-        List<Book> books = user.getBooks();
+
+
+        List<Book> sorted = bookService.returnAllBooksSorted(user, sortField, sortDirection);
+
         mav.addObject("user", user);
-        mav.addObject("booksList", books);
+        mav.addObject("booksList", sorted);
         mav.setViewName("books");
         return mav;
     }
@@ -71,17 +77,41 @@ public class BookController {
         bookService.saveBook(bookAuthorRequest,user);
         return "redirect:/books/get";
     }
-    @GetMapping("/get/authorReversed")
-    public ModelAndView sortBooksByAuthorReversed(@AuthenticationPrincipal AuthenticationDetails details) {
 
-        User user = userService.getById(details.getUserId());
-        List<Book> books = user.getBooks();
-        Stream<Book> sorted = books.stream().sorted(Comparator.comparing(Book::getTitle).reversed());
+    @DeleteMapping("/{id}/delete")
+    public String deleteBook(@PathVariable UUID id) {
+
+        bookService.deleteBookById(id);
+        return "redirect:/books/get";
+    }
+
+
+    @GetMapping("/{id}/edit")
+        public ModelAndView editBookPage(@PathVariable UUID id ) {
+
+        Book bookById = bookService.findById(id);
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("BookEditPage");
+        mav.addObject("bookById", bookById);
+        mav.addObject("bookEditRequest", BookDtoMapper.bookToBookEditRequest(bookById));
+        return mav;
+
+    }
+
+    @PutMapping("/{id}/edit")
+    public ModelAndView editBook(@PathVariable UUID id, @Valid BookEditRequest bookEditRequest , BindingResult bindingResult) {
 
         ModelAndView mav = new ModelAndView();
-        mav.addObject("booksList", sorted);
-        mav.setViewName("books");
-        return mav;
+        Book byId = bookService.findById(id);
+        if(bindingResult.hasErrors()) {
+            mav.addObject("bookEditRequest", bookEditRequest);
+            mav.setViewName("BookEditPage");
+            mav.addObject("bookById", byId);
+            return mav;
+        }
+        bookService.editBook(id, bookEditRequest);
+        return new ModelAndView("redirect:/books/get");
+
 
     }
 

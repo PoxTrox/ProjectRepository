@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class AuthorService {
@@ -28,6 +29,9 @@ public class AuthorService {
         authorRepository.save(newAuthor);
     }
 
+    public Author findById(UUID id){
+        return authorRepository.findById(id).orElseThrow(() -> new DomainException("Author not found"));
+    }
 
 
 }
