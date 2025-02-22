@@ -12,30 +12,27 @@
 <h1>Add book To your List</h1>
 
 <form class="add-book-form" th:method="POST" th:object="${bookAuthorRequest}" th:action="@{/books/add}">
+
     <label for="bookTitle">Book Title</label>
     <input type="text" name="bookTitle" id="bookTitle" th:field="*{title}" required></input>
     <p class="alert-warning" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
 
-
-
     <label for="price">Price</label>
-    <input type="text" name="price" id="price" th:filed="*{price}" required></input>
+    <input type="text" name="price" id="price" th:field="*{price}" required></input>
     <p class="alert-warning" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
+
+    <label for="authorFirstName">Author First Name</label>
+    <input type="text" placeholder="Author First Name" id="authorFirstName" name="authorFirstName" th:field="*{firstName}" required="required" />
+
+    <p class="text-warning" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+
+    <label for="authorLastName">Author Last Name</label>
+    <input type="text" name="authorLastName" id="authorLastName" th:field="*{lastName}" required></input>
+    <p class="alert-warning" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+
     <button id="button-addBook" type="submit">Add Book</button>
 
-    </form>
+</form>
 
-    <form th:action="@{/books/add}" th:method="POST" th:object="${authorRequest}">
-
-        <label for="authorFirstName">Author First Name</label>
-        <input type="text" placeholder="Author First Name" id="authorFirstName" name="authorFirstName" th:field="*{firstName}" required="required" />
-        <p class="text-warning" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
-
-        <label for="authorLastName">Author Last Name</label>
-        <input type="text" name="authorLastName" id="authorLastName" th:field="*{lastName}" required>
-        <p class="alert-warning" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
-
-
-    </form>
 </body>
 </html>

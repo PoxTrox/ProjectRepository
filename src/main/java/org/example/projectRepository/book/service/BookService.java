@@ -1,12 +1,10 @@
 package org.example.projectRepository.book.service;
-
 import org.example.projectRepository.author.model.Author;
 import org.example.projectRepository.author.service.AuthorService;
 import org.example.projectRepository.book.model.Book;
 import org.example.projectRepository.book.repository.BookRepository;
 import org.example.projectRepository.exception.DomainException;
 import org.example.projectRepository.user.model.User;
-import org.example.projectRepository.web.dto.AuthorRequest;
 import org.example.projectRepository.web.dto.BookAuthorRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,30 +41,25 @@ public class BookService {
 
     }
 
-    public void saveBook(BookAuthorRequest bookAuthorRequest , User user , AuthorRequest authorRequest) throws DomainException {
+    public void saveBook(BookAuthorRequest bookAuthorRequest , User user ) throws DomainException {
 
-        Optional<Book> byTitle = bookRepository.findByTitle(bookAuthorRequest.getTitle());
-        authorService.createAuthor(authorRequest);
+//
 
-        Optional<Author> optionalAuthor= Optional.ofNullable(authorService.findAuthorFirstAndLastName(authorRequest.getFirstName(), authorRequest.getLastName()));
+        Optional<Author> author1 = authorService.findAuthor(bookAuthorRequest.getFirstName(),bookAuthorRequest.getLastName());
 
-
-
-        if (byTitle.isPresent()) {
-            throw new RuntimeException("Title already exists");
+        if(author1.isEmpty()) {
+            Author newAuthor = new Author();
+            newAuthor.setFirstName(bookAuthorRequest.getFirstName());
+            newAuthor.setLastName(bookAuthorRequest.getLastName());
+            authorService.save(newAuthor);
         }
 
-        if(optionalAuthor.isEmpty()) {
-                authorService.createAuthor(authorRequest);
-        }
-        Author author = authorService.findAuthorFirstAndLastName(authorRequest.getFirstName(), authorRequest.getLastName());
+        Book book = new Book();
+        book.setTitle(bookAuthorRequest.getTitle());
+        book.setPrice(bookAuthorRequest.getPrice());
+        book.setAuthor(author1.get());
+        book.setUser(user);
 
-        Book book = Book.builder()
-                .title(bookAuthorRequest.getTitle())
-                .price(bookAuthorRequest.getPrice())
-                .author(author)
-                .user(user)
-                .build();
         bookRepository.save(book);
     }
 

@@ -2,6 +2,9 @@ package org.example.projectRepository.user.service;
 
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
+import org.example.projectRepository.author.service.AuthorService;
+import org.example.projectRepository.book.model.Book;
+import org.example.projectRepository.book.service.BookService;
 import org.example.projectRepository.exception.DomainException;
 import org.example.projectRepository.security.AuthenticationDetails;
 import org.example.projectRepository.user.model.User;
@@ -17,6 +20,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -26,11 +30,15 @@ public class UserService  implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final BookService bookService;
+    private final AuthorService authorService;
 
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, BookService bookService, AuthorService authorService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.bookService = bookService;
+        this.authorService = authorService;
     }
 
 
@@ -89,5 +97,11 @@ public class UserService  implements UserDetailsService {
 
         return new AuthenticationDetails(user.getId(),user.getUsername(),user.getPassword(),user.getRole(),user.isActive());
 
+    }
+    public List<Book> returnTitleBookReversed () {
+
+
+
+        return null;
     }
 }

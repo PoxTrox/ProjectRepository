@@ -33,12 +33,12 @@
             <table id="tableBooks">
                 <tr>
                     <th>Title</th>
-                    <th>Author</th>
+                    <th th:href="@{/books/get/authorReversed}">Author</th>
                     <th>Price</th>
                 </tr>
                 <tr th:each="book : ${user.getBooks}">
                     <td th:text="${book.title}"></td>
-                    <td th:text="${book.author.firstName} + ${book.author.lastName}"></td>
+                    <td th:text="${book.author.firstName} +' '+  ${book.author.lastName}"></td>
                     <td th:text="${book.price}"></td>
                 </tr>
             </table>
