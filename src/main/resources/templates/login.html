@@ -16,12 +16,12 @@
         <div class="login__field">
             <label for="username" class="form-label">Username</label>
             <input type="text" class="form-control" id="username" placeholder="Enter your Username" th:field="*{username}" required>
-            <p class="alert-warning" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+
         </div>
         <div class="login__field_password">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" placeholder="Enter your Password" th:field="*{password}" required>
-            <p class="alert-warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+            <p class="alert-warning" th:if="${errorMessage}" th:text="${errorMessage}"></p>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="checkbox" id="checkbox1"/>

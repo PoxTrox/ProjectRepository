@@ -32,15 +32,46 @@
 
         </div>
 
-        <button type="submit" class="btn-register"  id="registerButton" disabled>  Register </button>
+        <button type="submit" class="btn-register"  id="registerButton" disabled >  Register </button>
 
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const registerButton = document.getElementById("registerButton");
+                const checkBox = document.getElementById("checkBox");
+                // Бутонът първоначално е забранен
+                registerButton.disabled = true;
+                // Флаг за дали потребителят вече е получил съобщението
+                let alertShown = false;
+                // Функция, която проверява дали checkbox-ът е маркиран
+                function updateButtonState() {
+                    if (checkBox.checked) {
+                        registerButton.disabled = false; // Активиране на бутона
+                    } else {
+                        registerButton.disabled = true; // Деактивиране на бутона
+                    }
+                }
+                // Добавяне на event listener за промяна в checkbox-а
+                checkBox.addEventListener("change", function () {
+                    updateButtonState();
+                });
+                // Ако потребителят се опита да кликне без да е маркирал Terms of Use
+                registerButton.addEventListener("mouseover", function (event) {
+                    if (!checkBox.checked) {
+                        event.preventDefault(); // Спира натискането на бутона
+                        if (!alertShown) {
+                            alert("Check out Terms of Use");
+                            alertShown = false; // След като веднъж е показано, не се показва отново
+                        }
+                    }
+                });
+            });
+        </script>
 
         <p class="form-already">Already have an account? <a class="already-login" href="/login">Login</a>!</p>
     </form >
     <form class="TermOfUse" th:action="@{/TermsOfUse}" th:method="GET">
         <div class="form-check">
             <input class="form-check-input me-2" type="checkbox" value="checkbox" id="checkBox" placeholder="Please Agree aur terms" required/>
-
             <label class="form-check-label" for="checkBox" >
                 I agree all statements in <a id="termsLabel" th:href="@{TermOfUse}">Terms of service.</a>
             </label>
@@ -54,16 +85,7 @@
     <div class="footer"><p>© 2025 Project Repository. All rights reserved.</p></div>
 
 </footer>
-    <script>
-        function printThis (){
-            console.log("You must agree with our Term of use first")
-        }
-        document.getElementById("checkBox").addEventListener("change", function () {
-        printThis()
-            document.getElementById("registerButton").disabled = !this.checked;
 
-        });
-    </script>
 
 </body>
 </html>

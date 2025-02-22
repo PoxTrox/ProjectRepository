@@ -1,30 +1,49 @@
 package org.example.projectRepository.config;
 
 
-import org.example.projectRepository.security.SessionCheckInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@EnableWebSecurity
 public class WebMvcConfig implements WebMvcConfigurer {
 
 
-    private final SessionCheckInterceptor sessionCheckInterceptor;
 
-    @Autowired
-    public WebMvcConfig(SessionCheckInterceptor sessionCheckInterceptor) {
-        this.sessionCheckInterceptor = sessionCheckInterceptor;
-    }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
+    @Bean
+    public SecurityFilterChain getSecurityFilterChain(HttpSecurity http) throws Exception {
 
-        WebMvcConfigurer.super.addInterceptors(registry);
-        registry.addInterceptor((HandlerInterceptor) sessionCheckInterceptor)
-                .addPathPatterns("/**")
-                .excludePathPatterns("/css/**", "/js/**", "/images/**", "/fonts/**");
+        http.authorizeHttpRequests(matchers -> matchers
+                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                        .requestMatchers("/", "/register").permitAll()
+                      //  .requestMatchers("/users").hasRole("ADMIN")
+                        .anyRequest().authenticated()
+                )
+                .formLogin(form -> form.
+                                loginPage("/login")
+//                        .usernameParameter("username")
+//                        .passwordParameter("password")
+                                .defaultSuccessUrl("/home")
+                                .failureUrl("/login?error").permitAll())
+                .logout(logout -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout","GET"))
+                        .logoutSuccessUrl("/"));
+
+
+
+        ;
+
+
+        return http.build();
+
     }
 }

@@ -1,0 +1,44 @@
+body{
+    background: #605c5c
+}
+h1{
+    color:black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top:  50px;
+    padding-bottom: 50px;
+    font-size: 50px;
+}
+.form-profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+}
+label{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    padding: 15px;
+}
+input{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+}
+button{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    margin-top: 30px;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+.alert-warning {
+    background: #ffc600;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+    padding: 10px;
+}
+

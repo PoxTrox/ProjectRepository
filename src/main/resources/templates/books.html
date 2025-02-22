@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/books.css}">
+    <title>Books</title>
+</head>
+<body>
+
+<nav class="navbar">
+    <form>
+        <ul>
+            <li>
+                <a th:href="@{/home}" class="btn">Go Back</a>
+                <a th:href="@{/books/add}">Add Book </a>
+            </li>
+            <li>
+                <div class="dropdown">
+                    <button class="dropbtn">Sort by</button>
+                    <div class="content">
+                        <a href="#">By author</a>
+                        <a href="#">by Title</a>
+                        <a href="#">by price</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <div id="listOfBooks">
+            <table id="tableBooks">
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                </tr>
+                <tr th:each="book : ${user.getBooks}">
+                    <td th:text="${book.title}"></td>
+                    <td th:text="${book.author.firstName} + ${book.author.lastName}"></td>
+                    <td th:text="${book.price}"></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+
+</nav>
+<footer class="footer">
+
+    <div class="div-footer"><p>© 2025 Project Repository. All rights reserved.</p></div>
+
+</footer>
+
+
+</body>
+
+</html>

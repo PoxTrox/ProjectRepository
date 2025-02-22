@@ -33,5 +33,4 @@ public class Book {
     @ManyToOne
     private User user;
 
-
 }

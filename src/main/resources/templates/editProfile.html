@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" th:href="@{/css/editProfile.css}">
+</head>
+<body>
+
+<section class="container">
+    <h1>Edit your Profile</h1>
+    <form class="form-profile" th:action="@{'/users/' + ${user.id} + '/profile'}" th:method="PUT"
+          th:object="${profileEdit}">
+        <input type="hidden" name="_method" value="PUT" />
+
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" placeholder="First Name" th:field="*{firstName}">
+        <p class="alert-warning" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" placeholder="Last Name" th:field="*{lastName}">
+        <p class="alert-warning" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+
+        <label for="email">Enter Email</label>
+        <input type="text" id="email" placeholder="Email Address" th:field="*{email}">
+        <p class="alert-warning" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+
+        <label for="age">Enter your Age</label>
+        <input type="text" id="age" placeholder="Your Age" th:field="*{age}">
+        <p class="alert-warning" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></p>
+
+        <label for="country">Country you Live in</label>
+        <input type="text" id="country" placeholder="Country" th:field="*{country}">
+        <p class="alert-warning" th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></p>
+
+        <label for="ProfilePicture">Profile Picture</label>
+        <input type="text" id="ProfilePicture" placeholder="ProfilePicture" th:field="*{profilePicture}">
+        <p class="alert-warning" th:if="${#fields.hasErrors('profilePicture')}" th:errors="*{profilePicture}"></p>
+
+         <button type="submit">  Save </button>
+
+    </form>
+</section>
+
+
+
+
+</body>
+</html>

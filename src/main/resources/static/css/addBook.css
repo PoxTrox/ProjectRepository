@@ -1,0 +1,42 @@
+body {
+    background: #605c5c
+}
+.add-book-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+label{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    display: block;
+    padding: 10px;
+}
+input{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    padding: 10px;
+    background: #e4da9b;
+    border-radius: 10px;
+    border: 1px #0b0b05 solid;
+}
+#button-addBook{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: #8bbd54;
+    background: #4ac158;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-size: 30px;
+    cursor: pointer;
+}
+h1{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

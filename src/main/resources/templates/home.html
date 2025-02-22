@@ -13,7 +13,7 @@
     <form>
         <ul>
             <li>
-                <a th:href="@{/EditProfile}" class="btn">Edit Profile</a>
+                <a th:href="@{'/users/' + ${user.id} +'/profile'}" class="btn">My Profile</a>
             </li>
             <li>
                 <div class="dropdown">
@@ -21,7 +21,7 @@
                     <div class="content">
                         <a href="#">Tv_Shows</a>
                         <a href="#">Movies</a>
-                        <a href="#">Books</a>
+                        <a th:href="@{/books/get}">Books</a>
                     </div>
                 </div>
             </li>
@@ -45,32 +45,30 @@
     </div>
 </nav>
 <div class="Profile-section">
-    <img class="profile-img" src="/images/img.png" alt="Profile Picture"></img>
+    <img class="profile-img" th:src="${#strings.isEmpty(user.getProfilePic()) ?'static/images/img.png':user.profilePic}"
+         alt="Profile Picture"></img>
+
 </div>
 <h2>Additional info</h2>
 <div class="details-section-container">
-    <strong>Username: </strong>
-    <p th:text="${user.getUsername()}"></p>
+
+    <h3 th:text="${ 'Username : '+ user.getUsername()}"></h3>
 </div>
 <div class="details-section-container">
-    <strong>First name: </strong>
-    <p th:text="${ user.getFirstName()}"></p>
+
+    <h3 th:text="${'First name :' + user.getFirstName()}"></h3>
 </div>
 <div class="details-section-container">
-    <strong>Last name: </strong>
-    <p th:text="${user.getLastName()}"></p>
+    <h3 th:text="${'Last name :'+user.getLastName()}"></h3>
 </div>
 <div class="details-section-container">
-    <strong>Email address: </strong>
-    <p th:text="${user.email}"></p>
+    <h3 th:text="${'Email address :'+  user.email}"></h3>
 </div>
 <div class="details-section-container">
-    <strong>Years old: </strong>
-    <p th:text="${user.age}"></p>
+    <h3 th:text="${' Your age : '+ user.age}"></h3>
 </div>
 <div class="details-section-container">
-    <strong>Live in : </strong>
-    <p th:text="${user.country}"></p>
+    <h3 th:text="${'Country you live in : '+ user.country}"></h3>
 </div>
 <br>
 <h2 id="h2Title">Last Added Item </h2>
@@ -104,6 +102,12 @@
         time.innerHTML = clock.toLocaleTimeString()
     }, 1000)
 </script>
+
+<footer class="footer">
+
+    <div class="div-footer"><p>© 2025 Project Repository. All rights reserved.</p></div>
+
+</footer>
 
 
 </body>

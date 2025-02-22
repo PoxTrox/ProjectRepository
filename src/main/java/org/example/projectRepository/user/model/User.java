@@ -44,6 +44,8 @@ public class User {
 
     private String profilePic;
 
+    private boolean isActive;
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Book> books = new ArrayList<>();
 
