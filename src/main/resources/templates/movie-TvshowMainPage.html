@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Movie-TvShow</title>
+  <link rel="stylesheet" th:href="@{/css/movie-tvShowMainPage.css}"></link>
+
+</head>
+<body>
+
+<nav class="navbar">
+  <form>
+    <ul>
+      <li>
+        <a th:href="@{/home}" class="btn">Go Back</a>
+        <a th:href="@{/Media/movie/tvshow/add}">Add Movie/Tvshow </a>
+      </li>
+      <li>
+        <div class="dropdown">
+          <button class="dropbtn">Sort by</button>
+          <div class="content">
+            <a>byAuthor name  asc</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div id="listOfMedia">
+      <table id="mediaTable">
+        <tr>
+          <th>MediaType</th>
+          <th>Title</th>
+          <th>releaseDate</th>
+          <th>seasons</th>
+          <th>genre</th>
+
+        </tr>
+        <tr >
+          <td ></td>
+          <td ></td>
+          <td ></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+  </form>
+
+</nav>
+<footer class="footer">
+
+  <div class="div-footer"><p>© 2025 Project Repository. All rights reserved.</p></div>
+
+</footer>
+
+</body>
+</html>

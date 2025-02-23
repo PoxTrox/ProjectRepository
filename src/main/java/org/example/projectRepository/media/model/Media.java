@@ -25,7 +25,7 @@ public class Media {
     @Column(nullable = false)
     private LocalDate releaseDate;
 
-    @Column(nullable = false)
+
     private int season;
 
     private String genre;

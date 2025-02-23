@@ -1,0 +1,129 @@
+body {
+    background: #605c5c
+}
+
+
+.navbar ul {
+    list-style-type: none;
+    background-color: hsl(0, 0%, 25%);
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    text-align: center;
+    font-size: 16px;
+}
+
+.navbar a:hover {
+    background-color: hsl(0, 0%, 10%);
+}
+
+
+.navbar li {
+
+    align-items: center;
+    text-align: center;
+    display: inline-flex;
+
+}
+
+.navbar li button {
+    background-color: hsl(0, 0%, 25%);
+    color: white;
+    margin: 15px;
+    padding: 15px;
+
+}
+
+.navbar li button:hover {
+    background-color:hsl(0, 0%, 10%);;
+}
+
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown button {
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.dropdown a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+.dropdown .content {
+    display: none;
+    position: absolute;
+    background-color: hsl(55, 58%, 65%);
+    min-width: 100px;
+    box-shadow: 2px 2px 5px hsla(157, 50%, 55%, 0.8);
+}
+
+.dropdown:hover .content {
+    display: block;
+}
+
+.dropdown:hover button {
+    background-color: hsl(0, 0%, 70%);
+}
+
+.dropdown a:hover {
+
+    background-color: hsl(0, 0%, 90%);
+}
+#listOfMedia tr {
+    background-color: hsl(40, 25%, 24%);
+    display: block;
+    text-align: center;
+    color: white;
+}
+#listOfBooks td{
+    background-color: hsl(39, 27%, 41%);
+    width: 400px;
+    text-align: center;
+}
+#listOfMedia th{
+    width: 400px;
+    text-align: center;
+
+}
+#mediaTable{
+    background-color: hsl(60, 38%, 3%);
+
+}
+table{
+    margin: 200px 350px
+}
+.footer {
+    color: rgba(113, 156, 64, 0.69);
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 580px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: large;
+    letter-spacing: 5px
+}
+
+
+
+
+
+
+
+
+
+

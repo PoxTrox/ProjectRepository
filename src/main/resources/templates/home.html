@@ -13,14 +13,13 @@
     <form>
         <ul>
             <li>
-                <a th:href="@{'/users/' + ${user.id} +'/profile'}" class="btn">My Profile</a>
+                <a th:href="@{'/users/' + ${user.id} +'/profile'}" class="btn">Update Profile</a>
             </li>
             <li>
                 <div class="dropdown">
                     <button class="dropbtn">Media</button>
                     <div class="content">
-                        <a href="#">Tv_Shows</a>
-                        <a href="#">Movies</a>
+                        <a th:href="@{/Media/movie/tvshow}">Movie/TvShow</a>
                         <a th:href="@{/books/get}">Books</a>
                     </div>
                 </div>
