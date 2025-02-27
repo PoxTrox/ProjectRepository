@@ -92,7 +92,7 @@ body {
 }
 #listOfBooks td{
     background-color: hsl(39, 27%, 41%);
-    width: 400px;
+    width: auto;
     text-align: center;
 }
 #listOfMedia th{
@@ -117,6 +117,23 @@ table{
     font-size: large;
     letter-spacing: 5px
 }
+#mediaTable tr {
+    background-color: hsl(40, 25%, 24%);
+    text-align: center;
+    color: white;
+}
+#mediaTable td{
+    background-color: hsl(39, 27%, 41%);
+    width: 400px;
+    text-align: center;
+}
+#mediaTable th{
+    width: 400px;
+    text-align: center;
+}
+
+
+
 
 
 

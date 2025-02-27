@@ -38,13 +38,11 @@ public class BookController {
 
 
     @GetMapping("/get")
-    public ModelAndView getBooksPage(@AuthenticationPrincipal AuthenticationDetails details ,@RequestParam(name = "sort", defaultValue = "title") String sortField,
+    public ModelAndView getBooksPage(@AuthenticationPrincipal AuthenticationDetails details, @RequestParam(name = "sort", defaultValue = "title") String sortField,
                                      @RequestParam(name = "direction", defaultValue = "asc") String sortDirection) {
 
         ModelAndView mav = new ModelAndView();
-
         User user = userService.getById(details.getUserId());
-
 
         List<Book> sorted = bookService.returnAllBooksSorted(user, sortField, sortDirection);
 
@@ -65,8 +63,9 @@ public class BookController {
         mav.addObject("user", user);
         return mav;
     }
+
     @PostMapping("/add")
-    public String addBook(@Valid  BookAuthorRequest bookAuthorRequest , BindingResult bindingResult , @AuthenticationPrincipal AuthenticationDetails details) {
+    public String addBook(@Valid BookAuthorRequest bookAuthorRequest, BindingResult bindingResult, @AuthenticationPrincipal AuthenticationDetails details) {
 
         User user = userService.getById(details.getUserId());
 
@@ -74,7 +73,7 @@ public class BookController {
             return "addBook";
         }
 
-        bookService.saveBook(bookAuthorRequest,user);
+        bookService.saveBook(bookAuthorRequest, user);
         return "redirect:/books/get";
     }
 
@@ -87,7 +86,7 @@ public class BookController {
 
 
     @GetMapping("/{id}/edit")
-        public ModelAndView editBookPage(@PathVariable UUID id ) {
+    public ModelAndView editBookPage(@PathVariable UUID id) {
 
         Book bookById = bookService.findById(id);
         ModelAndView mav = new ModelAndView();
@@ -99,11 +98,11 @@ public class BookController {
     }
 
     @PutMapping("/{id}/edit")
-    public ModelAndView editBook(@PathVariable UUID id, @Valid BookEditRequest bookEditRequest , BindingResult bindingResult) {
+    public ModelAndView editBook(@PathVariable UUID id, @Valid BookEditRequest bookEditRequest, BindingResult bindingResult) {
 
         ModelAndView mav = new ModelAndView();
         Book byId = bookService.findById(id);
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             mav.addObject("bookEditRequest", bookEditRequest);
             mav.setViewName("BookEditPage");
             mav.addObject("bookById", byId);
@@ -111,7 +110,6 @@ public class BookController {
         }
         bookService.editBook(id, bookEditRequest);
         return new ModelAndView("redirect:/books/get");
-
 
     }
 

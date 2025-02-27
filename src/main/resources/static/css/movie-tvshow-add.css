@@ -1,3 +1,59 @@
 body {
     background: #605c5c
 }
+
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top:  50px;
+}
+.movie-tvshow{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.movie-tvshow label{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.movie-tvshow input{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.movie-tvshow select{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 25px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#releaseDate {
+    width: 410px;
+}
+
+button{
+    font-size: 20px;
+    padding: 10px;
+    border: 1px solid hsl(39, 27%, 41%);
+    border-radius: 5px;
+    background-color: hsl(126, 76%, 63%);
+}
+.alert-warning{
+    background-color: hsl(39, 27%, 41%);
+    color: white;
+    padding: 10px;
+    font-size: 10px;
+}

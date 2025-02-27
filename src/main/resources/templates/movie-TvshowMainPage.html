@@ -22,31 +22,46 @@
         <div class="dropdown">
           <button class="dropbtn">Sort by</button>
           <div class="content">
-            <a>byAuthor name  asc</a>
+            <a th:href="@{/Media/movie/tvshow(sort='title', direction=${direction == 'asc' ? 'desc' : 'asc'})}"> Sort by title asc</a>
+            <a th:href="@{/Media/movie/tvshow(sort='title', direction=${direction == 'desc' ? 'desc' : 'asc'})}"> Sort by title desc</a>
+            <a th:href="@{/Media/movie/tvshow(sort='genre', direction=${direction == 'desc' ? 'desc' : 'asc'})}"> Sort by genre desc</a>
+            <a th:href="@{/Media/movie/tvshow(sort='genre', direction=${direction == 'asc' ? 'desc' : 'asc'})}"> Sort by genre asc</a>
+            <a th:href="@{/Media/movie/tvshow(sort='releaseDate', direction=${direction == 'asc' ? 'desc' : 'asc'})}"> Sort by releaseDate asc</a>
+            <a th:href="@{/Media/movie/tvshow(sort='releaseDate', direction=${direction == 'desc' ? 'desc' : 'asc'})}"> Sort by releaseDate desc</a>
+            <a th:href="@{/Media/movie/tvshow(sort='seasons', direction=${direction == 'asc' ? 'desc' : 'asc'})}"> Sort by seasons asc</a>
+            <a th:href="@{/Media/movie/tvshow(sort='seasons', direction=${direction == 'desc' ? 'desc' : 'asc'})}">Sort by seasons asc</a>
           </div>
         </div>
       </li>
     </ul>
 
-    <div id="listOfMedia">
       <table id="mediaTable">
         <tr>
           <th>MediaType</th>
-          <th>Title</th>
-          <th>releaseDate</th>
-          <th>seasons</th>
-          <th>genre</th>
-
+          <th style="width: 600px">Title</th>
+          <th>Release_Date</th>
+          <th style="width: 100px">Seasons</th>
+          <th>Genre</th>
+          <th>Edit Media</th>
+          <th>Delete</th>
         </tr>
-        <tr >
-          <td ></td>
-          <td ></td>
-          <td ></td>
-          <td></td>
-          <td></td>
+        <tr th:each="show : ${shows}">
+          <td th:text="${show.mediaType}"></td>
+          <td th:text="${show.title}" style="width: 600px"></td>
+          <td th:text="${#temporals.format(show.releaseDate,'dd MMM yyyy')}"></td>
+          <td th:text="${show.season}" style="width: 100px"></td>
+          <td th:text="${show.genre}"></td>
+          <td>
+            <a th:href="@{'/Media/' + ${show.id} + '/edit'}">Edit Media</a>
+          </td>
+          <td>
+            <form th:action="@{'/Media/' + ${show.id} + '/delete'}" method="POST">
+              <input type="hidden" name="_method" value="delete"/>
+              <input type="submit" value="Delete"/>
+            </form>
+          </td>
         </tr>
       </table>
-    </div>
   </form>
 
 </nav>

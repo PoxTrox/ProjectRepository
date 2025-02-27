@@ -24,21 +24,19 @@ public class BookService {
 
     private final BookRepository bookRepository;
     private final AuthorService authorService;
-    private final UserService userService;
+
 
 
     @Autowired
-    public BookService(BookRepository bookRepository, AuthorService authorService, UserService userService) {
+    public BookService(BookRepository bookRepository, AuthorService authorService) {
         this.bookRepository = bookRepository;
         this.authorService = authorService;
-        this.userService = userService;
+
     }
 
 
 
     public void saveBook(BookAuthorRequest bookAuthorRequest , User user ) throws DomainException {
-
-//
 
         Optional<Author> author1 = authorService.findAuthor(bookAuthorRequest.getFirstName(),bookAuthorRequest.getLastName());
 
@@ -80,7 +78,11 @@ public class BookService {
     @Modifying
     @Query("DELETE FROM Book b WHERE b.id = :id")
     public void deleteBookById(UUID id){
-        bookRepository.deleteById(id);
+        Book byId = findById(id);
+        if(byId != null) {
+            bookRepository.delete(byId);
+        }
+        throw new DomainException("Book with id " + id + " not found");
     }
 
 

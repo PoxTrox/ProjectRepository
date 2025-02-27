@@ -1,0 +1,52 @@
+body {
+    background: #605c5c
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 25px;
+    padding: 15px;
+    display: flex;
+    justify-content: left;
+}
+
+input {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 25px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+#mediaType {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 25px;
+    padding: 15px;
+    display: flex;
+}
+
+#editMedia {
+    margin-top: 20px;
+    display: inline-block;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+
+}
+.alert-warning{
+    color: hsl(51, 73%, 60%);
+    font-size: 18px;
+}

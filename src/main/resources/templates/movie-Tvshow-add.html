@@ -9,40 +9,43 @@
     <title>Movie-TvShow</title>
 </head>
 <body>
-    <h1> HEELo</h1>
+<h1> Add media to your List</h1>
 
 
-    <form class="movie-tvshow"  >
-
-        <div class="div-media">
-            <label for="title"> Title</label>
-            <input type="text" id="title" name="title" required></input>
-            <p class="alert-warning"></p>
-        </div>
-
-        <div class="div-media">
-            <label for="releaseDate"> Release Date</label>
-            <input type="date" id="releaseDate" name="releaseDate" required></input>
-            <p class="alert-warning"></p>
-        </div>
-        <div class="div-media">
-            <label for="seasons"> Seasons</label>
-            <input type="number" id="seasons" name="seasons" required></input>
-            <p class="alert-warning"></p>
-        </div>
-        <div class="div-media">
-            <label for="genre"> Genre</label>
-            <input type="text" id="genre" name="genre" required></input>
-            <p class="alert-warning"></p>
-        </div>
-
-        <div class="div-media">
-            <label for="MediaType"> Media Type</label>
-            <input type="text" id="MediaType" name="MediaType" required>
-            <p class="alert-warning"></p>
-        </div>
+<form class="movie-tvshow" th:action="@{/Media/movie/tvshow/add}" th:object="${mediaTvshowRequest}" th:method="POST">
 
 
-    </form>
+        <label for="title"> Title</label>
+        <input type="text" id="title" name="title" th:field="*{title}" required>
+        <p class="alert-warning" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+
+        <label for="releaseDate"> Release Date</label>
+        <input type="date" id="releaseDate" name="releaseDate" th:field="*{releaseDate}" required>
+        <p class="alert-warning" th:if="${#fields.hasErrors('releaseDate')}" th:errors="*{releaseDate}"></p>
+
+        <label for="seasons"> Seasons</label>
+        <input type="number" id="seasons" name="seasons" th:field="*{seasons}" required>
+        <p class="alert-warning" th:if="${#fields.hasErrors('seasons')}" th:errors="*{seasons}"></p>
+
+        <label for="genre"> Genre</label>
+        <input type="text" id="genre" name="genre" th:field="*{genre}" required>
+        <p class="text-warning" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></p>
+
+        <label for="mediaType"> mediaType</label>
+        <select id="mediaType" th:field="*{mediaType}">
+            <option value="MediaType"
+                    th:each="mediaType : ${T(org.example.projectRepository.media.model.MediaType).values()}"
+                    th:value="${mediaType}" th:text="${mediaType}"></option>
+        </select>
+
+        <p class="alert-warning" th:if="${#fields.hasErrors('mediaType')}" th:errors="*{mediaType}"></p>
+
+
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+
+
+</form>
 </body>
 </html>
