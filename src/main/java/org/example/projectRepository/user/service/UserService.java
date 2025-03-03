@@ -51,6 +51,8 @@ public class UserService  implements UserDetailsService {
             throw new DomainException("Username is already in use.( %s )".formatted(user.get().getUsername()));
 
         }
+
+
         User newUSer = userRepository.save(initializeUser(registerRequest));
 
 
@@ -62,15 +64,27 @@ public class UserService  implements UserDetailsService {
 
     private User initializeUser(RegisterRequest registerRequest) {
 
-        return User.builder()
-                .username(registerRequest.getUsername())
-                .password(passwordEncoder.encode(registerRequest.getPassword()))
-                .role(UserRole.USER)
-                .isActive(true)
-                .build();
+        if(getAllUsers().isEmpty()) {
+            return  User.builder()
+                    .username(registerRequest.getUsername())
+                    .password(passwordEncoder.encode(registerRequest.getPassword()))
+                    .role(UserRole.ADMIN)
+                    .isActive(true)
+                    .build();
+        }else {
+            return User.builder()
+                    .username(registerRequest.getUsername())
+                    .password(passwordEncoder.encode(registerRequest.getPassword()))
+                    .role(UserRole.USER)
+                    .isActive(true)
+                    .build();
+        }
+
+
+
 
     }
-
+    @Transactional
     public User getById(UUID userId) {
 
         return userRepository.findById(userId).orElseThrow(() -> new DomainException("User with id [%s] does not exist.".formatted(userId)));
@@ -95,6 +109,10 @@ public class UserService  implements UserDetailsService {
 
         return new AuthenticationDetails(user.getId(),user.getUsername(),user.getPassword(),user.getRole(),user.isActive());
 
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
 }

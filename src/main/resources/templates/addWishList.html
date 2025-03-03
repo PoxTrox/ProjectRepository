@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add item in wish list</title>
+    <link rel="stylesheet" th:href="@{/css/wishListAdd.css}">
+
+</head>
+<body>
+
+<h1>Add item to your Wish list before you forget it</h1>
+
+<form  th:method="POST" th:action="@{/wishlist/add}" th:object="${wishListRequest}">
+
+  <label for="title"> Title</label>
+  <input type="text" id="title" name="title" th:field="*{title}" required>
+  <p class="alert-warning" th:if="${#fields.hasErrors('title')}" th:text="*{title}"></p>
+
+  <label for="typeEntertainment"> TypeEntertainment</label>
+    <select id="typeEntertainment" th:field="*{typeEntertainment}" >
+        <option value="typeEntertainment" id="selectWishListOption" th:each="typeEntertainment :
+         ${T(org.example.projectRepository.wishList.model.TypeEntertainment).values()}"
+                th:value="${typeEntertainment}" th:text="${typeEntertainment}"></option>
+    </select>
+  <p class="alert-warning"></p>
+
+  <label for="description"> Description</label>
+  <input type="text" id="description" name="description"  th:field="*{description}" required>
+  <p class="alert-warning" th:if="${#fields.hasErrors('description')}" th:text="*{description}"></p>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+<footer class="footer">
+
+    <div class="div-footer"><p>© 2025 Project Repository. All rights reserved.</p></div>
+
+</footer>
+
+</body>
+</html>

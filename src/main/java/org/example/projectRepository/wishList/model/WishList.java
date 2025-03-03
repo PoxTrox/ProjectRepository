@@ -25,7 +25,7 @@ public class WishList {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TypeEntertainment entertainment;
+    private TypeEntertainment typeEntertainment;
 
     @Column(columnDefinition = "TEXT")
     private String description;

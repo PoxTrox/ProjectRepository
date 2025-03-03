@@ -1,0 +1,123 @@
+body {
+    background: #605c5c
+}
+
+.navbar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background: #425e5e;
+    border-bottom: 2px solid #070907;
+}
+.navbar li a {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 30px;
+    text-decoration: none;
+    color: #489a52;
+
+
+}
+.navbar li {
+    text-decoration: none;
+    marker: none;
+    list-style-type: none;
+}
+
+h1{
+    position: fixed;
+    top: 10%;
+    left: 47%;
+}
+
+
+#wishlistTable th{
+    width: 400px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 23px;
+
+}
+#wishlistTable{
+    background-color: hsl(60, 38%, 3%);
+
+}
+table{
+    margin: 200px 350px;
+
+}
+#wishlistTable tr {
+    background-color: hsl(40, 25%, 24%);
+    text-align: center;
+    color: white;
+}
+#wishlistTable td{
+    background-color: hsl(39, 27%, 41%);
+    width: auto;
+    text-align: center;
+    font-size: 23px;
+}
+footer{
+    color: rgba(113, 156, 64, 0.69);
+    text-align: center;
+    margin-bottom: auto;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: large;
+    letter-spacing: 5px
+}
+
+.dropdown {
+    display: inline-block;
+    margin-left: 17px;
+}
+
+.dropdown button {
+    background-color: #43af60;
+    padding: 10px 15px;
+    border-radius: 15px;
+    border-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.dropdown a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    padding: 10px 15px;
+
+}
+
+.dropdown .content {
+    display: none;
+    position: absolute;
+    background-color: hsl(53, 70%, 72%);
+    min-width: 100px;
+    box-shadow: 2px 2px 5px hsla(157, 50%, 55%, 0.8);
+    border-radius: 15px;
+    text-align: left;
+}
+
+.dropdown:hover .content {
+    display: block;
+}
+
+.dropdown:hover button {
+color: hsl(165, 57%, 14%);
+}
+
+.dropdown a:hover {
+color: hsl(165, 57%, 14%);
+}
+
+
+
+
+
+
+

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wish List</title>
+    <link rel="stylesheet" th:href="@{css/wishList.css}">
+</head>
+<body>
+
+<h1> My Wish List</h1>
+
+
+<nav class="navbar">
+  <form>
+    <ul>
+      <li>
+        <a th:href="@{/home}" class="btn">Go Back</a>
+        <a th:href="@{/wishlist/add}">Add To My WishLIst</a>
+        <div class="dropdown">
+          <button class="dropbtn">Sort by</button>
+          <div class="content">
+            <a th:href="@{/wishlist(sort='title', direction=${direction == 'desc' ? 'desc' : 'asc'})}">sort by Title asc</a>
+            <a th:href="@{/wishlist(sort='title', direction=${direction == 'desc' ? 'asc' : 'desc'})}">sort by Title desc </a>
+            <a th:href="@{/wishlist(sort='typeEntertainment', direction=${direction == 'desc' ? 'desc' : 'asc'})}">sort by typeEntertainment asc </a>
+            <a th:href="@{/wishlist(sort='typeEntertainment', direction=${direction == 'desc' ? 'asc' : 'desc'})}">sort by typeEntertainment desc </a>
+            <a th:href="@{/wishlist(sort='creationDate', direction=${direction == 'desc' ? 'desc' : 'asc'})}">sort by creationDate asc </a>
+            <a th:href="@{/wishlist(sort='creationDate', direction=${direction == 'desc' ? 'asc' : 'desc'})}">sort by creationDate desc </a>
+            <a th:href="@{/wishlist(sort='completed', direction=${direction == 'desc' ? 'desc' : 'asc'})}">sort by Completed desc </a>
+            <a th:href="@{/wishlist(sort='completed', direction=${direction == 'desc' ? 'asc' : 'desc'})}">sort by  Completed desc </a>
+
+
+
+          </div>
+        </div>
+      </li>
+    </ul>
+  </form>
+</nav>
+
+<table id="wishlistTable">
+  <tr>
+    <th>Title</th>
+    <th >TypeEntertainment</th>
+    <th>Created at</th>
+    <th>Completed </th>
+    <th>Description</th>
+  </tr>
+  <tr th:each="wishList : ${wishLists}">
+    <td th:text="${wishList.title}"> </td>
+    <td th:text="${wishList.typeEntertainment}" ></td>
+    <td th:text="${#temporals.format(wishList.creationDate, 'dd MMM yyyy')}" ></td>
+    <td th:text="${wishList.completed}"> </td>
+    <td th:text="${wishList.description}"> </td>
+  </tr>
+</table>
+</body>
+</html>

@@ -25,7 +25,7 @@
                 </div>
             </li>
             <li>
-                <a th:href="@{/MyWishList}" class="btn">My Wish List</a>
+                <a th:href="@{/wishlist}" class="btn">My Wish List</a>
             </li>
             <li>
                 <a th:href="@{/messages}" class="btn">Messages</a>
@@ -44,7 +44,7 @@
     </div>
 </nav>
 <div class="Profile-section">
-    <img class="profile-img" th:src="${#strings.isEmpty(user.getProfilePic()) ?'static/images/img.png':user.profilePic}"
+    <img class="profile-img" th:src="${#strings.isEmpty(user.getProfilePic()) ?'Screenshot 2025-03-03 002657.png':user.profilePic}"
          alt="Profile Picture"></img>
 
 </div>
@@ -81,13 +81,12 @@
             <th>Seasons</th>
             <th>Realise_Date</th>
         </tr>
-        <tr>
-            <td>Movie</td>
-            <td>P2</td>
-            <td>Horror</td>
-            <td></td>
-            <td> 2007</td>
-
+        <tr th:if="${not #lists.isEmpty(user.getShows())}" th:with="lastShow=${user.getShows()[#lists.size(user.getShows().getLast())]}">
+            <td th:text="${lastShow.mediaType}"></td>
+            <td th:text="${lastShow.title}"></td>
+            <td th:text="${lastShow.genre}"></td>
+            <td th:text="${lastShow.season}"></td>
+            <td th:text="${#temporals.format(lastShow.releaseDate, 'dd MMM yyyy')}"> 2007</td>
         </tr>
     </table>
 

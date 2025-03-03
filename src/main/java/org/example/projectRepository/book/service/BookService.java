@@ -1,4 +1,5 @@
 package org.example.projectRepository.book.service;
+
 import jakarta.transaction.Transactional;
 import org.example.projectRepository.author.model.Author;
 import org.example.projectRepository.author.service.AuthorService;
@@ -6,13 +7,13 @@ import org.example.projectRepository.book.model.Book;
 import org.example.projectRepository.book.repository.BookRepository;
 import org.example.projectRepository.exception.DomainException;
 import org.example.projectRepository.user.model.User;
-import org.example.projectRepository.user.service.UserService;
 import org.example.projectRepository.web.dto.BookAuthorRequest;
 import org.example.projectRepository.web.dto.BookEditRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +27,6 @@ public class BookService {
     private final AuthorService authorService;
 
 
-
     @Autowired
     public BookService(BookRepository bookRepository, AuthorService authorService) {
         this.bookRepository = bookRepository;
@@ -35,12 +35,11 @@ public class BookService {
     }
 
 
+    public void saveBook(BookAuthorRequest bookAuthorRequest, User user) throws DomainException {
 
-    public void saveBook(BookAuthorRequest bookAuthorRequest , User user ) throws DomainException {
+        Optional<Author> author1 = authorService.findAuthor(bookAuthorRequest.getFirstName(), bookAuthorRequest.getLastName());
 
-        Optional<Author> author1 = authorService.findAuthor(bookAuthorRequest.getFirstName(),bookAuthorRequest.getLastName());
-
-        if(author1.isEmpty()) {
+        if (author1.isEmpty()) {
             Author newAuthor = new Author();
             newAuthor.setFirstName(bookAuthorRequest.getFirstName());
             newAuthor.setLastName(bookAuthorRequest.getLastName());
@@ -56,30 +55,30 @@ public class BookService {
         bookRepository.save(book);
     }
 
-    public List<Book> returnAllBooksSorted(User user ,String sortedBy, String direction) {
+    public List<Book> returnAllBooksSorted(User user, String sortedBy, String direction) {
 
-        List<Book> books = user.getBooks();
 
-        Comparator<Book>comparator;
-        if(sortedBy.equals("title")) {
-            comparator=Comparator.comparing(Book::getTitle);
-        }else if(sortedBy.equals("price")) {
-            comparator=Comparator.comparing(Book::getPrice);
-        }else {
-            comparator=Comparator.comparing(book -> book.getAuthor().getFirstName() + " " + book.getAuthor().getLastName());
+        if (sortedBy.equals("title") && direction.equals("asc")) {
+            return bookRepository.findAllByUserOrderByTitleAsc(user);
+        } else if (sortedBy.equals("title") && direction.equals("desc")) {
+            return bookRepository.findAllByUserOrderByTitleDesc(user);
+        }else if(sortedBy.equals("Author") && direction.equals("asc")) {
+            return bookRepository.findAllByUserOrderByAuthorAsc(user);
+        }else if(sortedBy.equals("Author") && direction.equals("desc")) {
+            return bookRepository.findAllByUserOrderByAuthorDesc(user);
+        }else if(sortedBy.equals("price") && direction.equals("asc")) {
+            return bookRepository.findAllByUserOrderByPriceAsc(user);
+        }else  {
+            return bookRepository.findAllByUserOrderByPriceDesc(user);
         }
 
-        if(direction.equals("desc")) {
-            comparator=comparator.reversed();
-        }
-        return books.stream().sorted(comparator).collect(Collectors.toList());
     }
     @Transactional
     @Modifying
     @Query("DELETE FROM Book b WHERE b.id = :id")
-    public void deleteBookById(UUID id){
+    public void deleteBookById(UUID id) {
         Book byId = findById(id);
-        if(byId != null) {
+        if (byId != null) {
             bookRepository.delete(byId);
         }
         throw new DomainException("Book with id " + id + " not found");

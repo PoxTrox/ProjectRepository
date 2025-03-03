@@ -1,6 +1,9 @@
 package org.example.projectRepository.web;
 
 import jakarta.validation.Valid;
+import org.example.projectRepository.book.model.Book;
+import org.example.projectRepository.media.Service.MediaService;
+import org.example.projectRepository.media.model.Media;
 import org.example.projectRepository.security.AuthenticationDetails;
 import org.example.projectRepository.user.model.User;
 import org.example.projectRepository.user.service.UserService;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -23,10 +27,12 @@ import java.util.UUID;
 public class indexController {
 
     private final UserService userService;
+    private final MediaService mediaService;
 
     @Autowired
-    public indexController(UserService userService) {
+    public indexController(UserService userService, MediaService mediaService) {
         this.userService = userService;
+        this.mediaService = mediaService;
     }
 
 
@@ -79,7 +85,9 @@ public class indexController {
         ModelAndView modelAndView = new ModelAndView();
 
         User user = userService.getById(authenticationDetails.getUserId());
+        List<Media> shows = user.getShows();
         modelAndView.addObject("user", user);
+        modelAndView.addObject("shows", shows);
         modelAndView.setViewName("home");
         return modelAndView;
     }

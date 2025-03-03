@@ -22,14 +22,14 @@
         <div class="dropdown">
           <button class="dropbtn">Sort by</button>
           <div class="content">
-            <a th:href="@{/Media/movie/tvshow(sort='title', direction=${direction == 'asc' ? 'desc' : 'asc'})}"> Sort by title asc</a>
-            <a th:href="@{/Media/movie/tvshow(sort='title', direction=${direction == 'desc' ? 'desc' : 'asc'})}"> Sort by title desc</a>
-            <a th:href="@{/Media/movie/tvshow(sort='genre', direction=${direction == 'desc' ? 'desc' : 'asc'})}"> Sort by genre desc</a>
-            <a th:href="@{/Media/movie/tvshow(sort='genre', direction=${direction == 'asc' ? 'desc' : 'asc'})}"> Sort by genre asc</a>
-            <a th:href="@{/Media/movie/tvshow(sort='releaseDate', direction=${direction == 'asc' ? 'desc' : 'asc'})}"> Sort by releaseDate asc</a>
-            <a th:href="@{/Media/movie/tvshow(sort='releaseDate', direction=${direction == 'desc' ? 'desc' : 'asc'})}"> Sort by releaseDate desc</a>
-            <a th:href="@{/Media/movie/tvshow(sort='seasons', direction=${direction == 'asc' ? 'desc' : 'asc'})}"> Sort by seasons asc</a>
+            <a th:href="@{/Media/movie/tvshow(sort='title', direction=${direction == 'desc' ? 'desc' : 'asc'})}"> Sort by title asc</a>
+            <a th:href="@{/Media/movie/tvshow(sort='title', direction=${direction == 'desc' ? 'asc' : 'desc'})}"> Sort by title desc</a>
+            <a th:href="@{/Media/movie/tvshow(sort='releaseDate', direction=${direction == 'desc' ? 'desc' : 'asc'})}"> Sort by release Date asc</a>
+            <a th:href="@{/Media/movie/tvshow(sort='releaseDate', direction=${direction == 'desc' ? 'asc' : 'desc'})}"> Sort by release Date desc</a>
+            <a th:href="@{/Media/movie/tvshow(sort='mediaType', direction=${direction == 'desc' ? 'desc' : 'asc'})}"> Sort by media Type asc</a>
+            <a th:href="@{/Media/movie/tvshow(sort='mediaType', direction=${direction == 'desc' ? 'asc' : 'desc'})}"> Sort by media Type desc</a>
             <a th:href="@{/Media/movie/tvshow(sort='seasons', direction=${direction == 'desc' ? 'desc' : 'asc'})}">Sort by seasons asc</a>
+            <a th:href="@{/Media/movie/tvshow(sort='seasons', direction=${direction == 'desc' ? 'asc' : 'desc'})}">Sort by seasons desc</a>
           </div>
         </div>
       </li>

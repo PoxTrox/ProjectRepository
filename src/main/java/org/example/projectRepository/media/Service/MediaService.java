@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -34,6 +35,7 @@ public class MediaService {
 
     public void saveMedia(MediaTvshowRequest mediaTvshowRequest, User user) {
 
+
         User currenUser = userService.getById(user.getId());
         Media media = Media.builder()
                 .title(mediaTvshowRequest.getTitle())
@@ -46,13 +48,13 @@ public class MediaService {
     }
 
 
-    public Media  findById(UUID id) {
+    public Media findById(UUID id) {
 
         return mediaRepository.findById(id).orElseThrow(() -> new DomainException("Media not found"));
 
     }
 
-    public void editMedia(UUID id,  MovieTvShowEditRequest movieTvShowEditRequest) {
+    public void editMedia(UUID id, MovieTvShowEditRequest movieTvShowEditRequest) {
 
         Media mediaById = findById(id);
         mediaById.setTitle(movieTvShowEditRequest.getTitle());
@@ -66,29 +68,23 @@ public class MediaService {
 
     public List<Media> returnAllMediaSorted(User user, String sortedBy, String direction) {
 
-
-        List<Media> allShows = user.getShows();
-
-        Comparator<Media>comparator = null;
-
-        if(sortedBy.equals("title")) {
-            comparator = Comparator.comparing(Media::getTitle);
-        }else if(sortedBy.equals("genre")) {
-            comparator = Comparator.comparing(Media::getGenre);
-        }else if(sortedBy.equals("releaseDate")) {
-            comparator = Comparator.comparing(Media::getReleaseDate);
-        }else if(sortedBy.equals("seasons")) {
-            comparator = Comparator.comparing(Media::getSeason);
+        if (sortedBy.equals("title") && direction.equals("asc")) {
+            return mediaRepository.findAllByUserOrderByTitleAsc(user);
+        }else if (sortedBy.equals("title") && direction.equals("desc")) {
+            return mediaRepository.findAllByUserOrderByTitleDesc(user);
+        }else if(sortedBy.equals("releaseDate") && direction.equals("asc")) {
+            return mediaRepository.findAllByUserOrderByReleaseDateAsc(user);
+        }else if (sortedBy.equals("releaseDate") && direction.equals("desc")) {
+            return mediaRepository.findAllByUserOrderByReleaseDateDesc(user);
+        }else if (sortedBy.equals("mediaType") && direction.equals("asc")) {
+            return mediaRepository.findAllByUserOrderByMediaTypeAsc(user);
+        }else if (sortedBy.equals("mediaType") && direction.equals("desc")) {
+            return mediaRepository.findAllByUserOrderByMediaTypeDesc(user);
+        }else if (sortedBy.equals("seasons") && direction.equals("asc")) {
+            return mediaRepository.findAllByUserOrderBySeasonAsc(user);
+        }else {
+            return mediaRepository.findAllByUserOrderBySeasonDesc(user);
         }
-
-        if(direction.equals("desc")) {
-            assert comparator != null;
-            comparator=comparator.reversed();
-        }
-
-        assert comparator != null;
-        return allShows.stream().sorted(comparator).collect(Collectors.toList());
-
     }
 
     public void removeBy(UUID id) {

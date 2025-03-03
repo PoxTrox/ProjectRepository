@@ -3,7 +3,6 @@ package org.example.projectRepository.web.mapper;
 import lombok.experimental.UtilityClass;
 
 import org.example.projectRepository.media.model.Media;
-import org.example.projectRepository.web.dto.MediaTvshowRequest;
 import org.example.projectRepository.web.dto.MovieTvShowEditRequest;
 
 @UtilityClass

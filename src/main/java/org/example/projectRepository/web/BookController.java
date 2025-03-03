@@ -44,10 +44,11 @@ public class BookController {
         ModelAndView mav = new ModelAndView();
         User user = userService.getById(details.getUserId());
 
-        List<Book> sorted = bookService.returnAllBooksSorted(user, sortField, sortDirection);
+      List<Book> sortedList = bookService.returnAllBooksSorted(user, sortField, sortDirection);
+
 
         mav.addObject("user", user);
-        mav.addObject("booksList", sorted);
+        mav.addObject("books", sortedList);
         mav.setViewName("books");
         return mav;
     }

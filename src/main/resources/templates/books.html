@@ -25,11 +25,11 @@
                             Author name  asc</a>
                         <a th:href="@{/books/get(sort='Author', direction=${direction == 'desc' ? 'desc' : 'asc'})}">by
                             Author name  desc</a>
-                        <a th:href="@{/books/get(sort='title', direction=${direction == 'asc' ? 'desc' : 'asc'})}">by
+                        <a th:href="@{/books/get(sort='title', direction=${direction == 'desc' ? 'desc' : 'asc'})}">by
                             Title asc</a>
                         <a th:href="@{/books/get(sort='title', direction=${direction == 'desc' ? 'asc' : 'desc'})}">by
                             Title desc</a>
-                        <a th:href="@{/books/get(sort='price', direction=${direction == 'asc' ? 'desc' : 'asc'})}">by
+                        <a th:href="@{/books/get(sort='price', direction=${direction == 'desc' ? 'desc' : 'asc'})}">by
                             price asc</a>
                         <a th:href="@{/books/get(sort='price', direction=${direction == 'desc' ? 'asc' : 'desc'})}">by
                             price desc</a>
@@ -48,7 +48,7 @@
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
-                <tr th:each="book : ${booksList}">
+                <tr th:each="book :${books}">
                     <td th:text="${book.title}"></td>
                     <td th:text="${book.author.firstName} +' '+  ${book.author.lastName}"></td>
                     <td th:text="${book.price}"></td>

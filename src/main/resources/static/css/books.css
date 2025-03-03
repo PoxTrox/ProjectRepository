@@ -70,6 +70,7 @@ body {
     background-color: hsl(55, 58%, 65%);
     min-width: 100px;
     box-shadow: 2px 2px 5px hsla(157, 50%, 55%, 0.8);
+    text-align: left;
 }
 
 .dropdown:hover .content {
