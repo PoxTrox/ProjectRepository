@@ -90,7 +90,6 @@ footer{
     color: black;
     text-decoration: none;
     padding: 10px 15px;
-
 }
 
 .dropdown .content {
@@ -114,7 +113,9 @@ color: hsl(165, 57%, 14%);
 .dropdown a:hover {
 color: hsl(165, 57%, 14%);
 }
-
+a{
+    text-decoration: none;
+}
 
 
 

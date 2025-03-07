@@ -44,17 +44,30 @@
   <tr>
     <th>Title</th>
     <th >TypeEntertainment</th>
+    <th>Season</th>
     <th>Created at</th>
     <th>Completed </th>
     <th>Description</th>
+    <th>Edit</th>
   </tr>
   <tr th:each="wishList : ${wishLists}">
     <td th:text="${wishList.title}"> </td>
     <td th:text="${wishList.typeEntertainment}" ></td>
+    <td th:text="${wishList.seasons}" ></td>
     <td th:text="${#temporals.format(wishList.creationDate, 'dd MMM yyyy')}" ></td>
-    <td th:text="${wishList.completed}"> </td>
-    <td th:text="${wishList.description}"> </td>
+    <td th:text="${wishList.completed}">
+    </td>
+    <td>
+         <a class="openModel" th:href="@{'/wishlist/' + ${wishList.id} + '/description'}">view</a>
+    </td>
+    <td>
+      <a th:href="@{'/wishlist/' + ${wishList.id} + '/edit'}">Edit Media</a>
+
+    </td>
   </tr>
 </table>
+
+
+
 </body>
 </html>

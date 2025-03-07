@@ -3,6 +3,7 @@ package org.example.projectRepository.wishList.service;
 import org.example.projectRepository.exception.DomainException;
 import org.example.projectRepository.user.model.User;
 import org.example.projectRepository.user.service.UserService;
+import org.example.projectRepository.web.dto.WishListEditRequest;
 import org.example.projectRepository.web.dto.WishListRequest;
 import org.example.projectRepository.wishList.model.WishList;
 import org.example.projectRepository.wishList.repository.WishlistRepository;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -64,6 +66,26 @@ public class WishListService {
         }else {
             return wishlistRepository.findAllByUserOrderByCompletedDesc(user);
         }
+
+    }
+
+    public WishList findById(UUID id) {
+        return wishlistRepository.findById(id).orElseThrow( () -> new DomainException( "Wished Media with %s not found".formatted(id) ) );
+    }
+
+
+    public void editWishListData(UUID id, WishListEditRequest wishListEditRequest) {
+
+       WishList editWishDat = findById(id);
+
+       editWishDat.setTitle(wishListEditRequest.getTitle());
+       editWishDat.setDescription(wishListEditRequest.getDescription());
+       editWishDat.setTypeEntertainment(wishListEditRequest.getTypeEntertainment());
+       editWishDat.setSeasons(wishListEditRequest.getSeasons());
+       editWishDat.setCreationDate(LocalDate.now());
+       editWishDat.setCompleted(wishListEditRequest.isCompleted());
+
+       wishlistRepository.save(editWishDat);
 
     }
 }

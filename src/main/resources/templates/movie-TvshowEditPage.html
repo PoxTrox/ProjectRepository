@@ -30,6 +30,7 @@
     <input type="text" name="genre" id="genre" th:field="*{genre}" required></input>
     <p class="alert-warning" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}">Error here</p>
 
+    <label for=mediaType>Director</label>
     <select id="mediaType" th:field="*{mediaType}">
         <option value="MediaType" th:each="mediaType : ${T(org.example.projectRepository.media.model.MediaType).values()}" th:value="${mediaType}" th:text="${mediaType}"></option>
     </select>

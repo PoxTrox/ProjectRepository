@@ -1,0 +1,71 @@
+body {
+    background: #605c5c
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+label{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #8bbd54;
+}
+input{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    margin-bottom: 15px;
+
+}
+#wishlist{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    padding-left: 27px;
+    padding-right: 27px;
+}
+
+button{
+    font-size: 30px;
+    cursor: pointer;
+    margin-top: 18px;
+    border-radius: 10px;
+    background: #339a3e;
+    position: fixed;
+    top: 47%;
+    left: 55.5%;
+    border-color: #0b0b05;
+    margin-bottom: 4px;
+}
+.footer {
+    color: rgba(113, 156, 64, 0.69);
+    text-align: center;
+    margin-bottom: 100px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: large;
+    letter-spacing: 5px;
+    position: fixed;
+    top: 90%;
+    left: 40%;
+}
+#categoryType{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+
+}

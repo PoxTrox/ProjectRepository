@@ -44,7 +44,7 @@
     </div>
 </nav>
 <div class="Profile-section">
-    <img class="profile-img" th:src="${#strings.isEmpty(user.getProfilePic()) ?'Screenshot 2025-03-03 002657.png':user.profilePic}"
+    <img class="profile-img" th:src="${#strings.isEmpty(user.getProfilePic()) ? 'src/main/resources/static/images/Screenshot 2025-02-06 150211.png' : user.profilePic}"
          alt="Profile Picture"></img>
 
 </div>
@@ -81,7 +81,7 @@
             <th>Seasons</th>
             <th>Realise_Date</th>
         </tr>
-        <tr th:if="${not #lists.isEmpty(user.getShows())}" th:with="lastShow=${user.getShows()[#lists.size(user.getShows().getLast())]}">
+        <tr th:if="${not #lists.isEmpty(user.getShows())}" th:with="lastShow=${user.getShows()[#lists.size(user.getShows().size()-1)]}">
             <td th:text="${lastShow.mediaType}"></td>
             <td th:text="${lastShow.title}"></td>
             <td th:text="${lastShow.genre}"></td>

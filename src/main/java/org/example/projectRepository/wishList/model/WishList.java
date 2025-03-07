@@ -30,6 +30,8 @@ public class WishList {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    private int seasons;
+
     @Column(nullable = false)
     private LocalDate creationDate;
 

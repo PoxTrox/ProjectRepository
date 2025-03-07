@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Description</title>
+  <link rel="stylesheet" th:href="@{/css/modelWindow.css}">
+</head>
+<body>
+
+<form th:action="@{'/wishList/' + ${wishItem.id}+ '/description'}" th:object="${wishItem.description}" method="POST">
+    <div class="Model-container" id="ModelContainer">
+        <div class="model">
+            <h1  th:text="${'Description for '+ wishItem.title}"> </h1>
+            <p th:text="${wishItem.description}"></p>
+            <button>
+                <a id="goBack" th:href="@{/wishlist}"> go back</a>
+            </button>
+
+        </div>
+    </div>
+
+
+
+</form>
+
+
+
+
+</body>
+</html>
