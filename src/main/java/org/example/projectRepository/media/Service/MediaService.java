@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -37,12 +38,14 @@ public class MediaService {
 
 
         User currenUser = userService.getById(user.getId());
+        LocalDateTime now = LocalDateTime.now();
         Media media = Media.builder()
                 .title(mediaTvshowRequest.getTitle())
                 .releaseDate(LocalDate.parse(mediaTvshowRequest.getReleaseDate()))
                 .genre(mediaTvshowRequest.getGenre())
                 .mediaType(mediaTvshowRequest.getMediaType())
                 .user(currenUser)
+                .creationAt(now)
                 .build();
         mediaRepository.save(media);
     }
@@ -90,5 +93,10 @@ public class MediaService {
     public void removeBy(UUID id) {
 
         mediaRepository.deleteById(id);
+    }
+
+    public List<Media> returnAllMedia (User user) {
+
+        return mediaRepository.findAllByUserOrderByCreationAtDesc(user);
     }
 }

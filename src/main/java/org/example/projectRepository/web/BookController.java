@@ -1,6 +1,7 @@
 package org.example.projectRepository.web;
 
 import jakarta.validation.Valid;
+import org.example.projectRepository.author.service.AuthorService;
 import org.example.projectRepository.book.model.Book;
 import org.example.projectRepository.book.service.BookService;
 import org.example.projectRepository.security.AuthenticationDetails;
@@ -28,12 +29,13 @@ public class BookController {
 
     private final UserService userService;
     private final BookService bookService;
+    private final AuthorService authorService;
 
     @Autowired
-    public BookController(UserService userService, BookService bookService) {
+    public BookController(UserService userService, BookService bookService, AuthorService authorService) {
         this.userService = userService;
         this.bookService = bookService;
-
+        this.authorService = authorService;
     }
 
 
@@ -44,7 +46,7 @@ public class BookController {
         ModelAndView mav = new ModelAndView();
         User user = userService.getById(details.getUserId());
 
-      List<Book> sortedList = bookService.returnAllBooksSorted(user, sortField, sortDirection);
+        List<Book> sortedList = bookService.returnAllBooksSorted(user, sortField, sortDirection);
 
 
         mav.addObject("user", user);
@@ -74,13 +76,13 @@ public class BookController {
             return "addBook";
         }
 
+        authorService.createAuthor(bookAuthorRequest);
         bookService.saveBook(bookAuthorRequest, user);
         return "redirect:/books/get";
     }
 
     @DeleteMapping("/{id}/delete")
     public String deleteBook(@PathVariable UUID id) {
-
         bookService.deleteBookById(id);
         return "redirect:/books/get";
     }

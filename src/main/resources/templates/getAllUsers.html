@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AllUsers</title>
+    <link rel="stylesheet" th:href="@{/css/getAllUsers.css}"></link>
+</head>
+<body>
+<h1>All Users In Your Repository </h1>
+
+<table id="userTable">
+    <tr>
+        <th  style="width: 250px">User-name</th>
+        <th style="width: 1000px">Description</th>
+        <th> status</th>
+
+    </tr>
+    <tr th:each="user : ${users}" >
+        <td th:text="${user.username}"></td>
+        <td>
+            <form th:action="@{'/users/' + ${user.id}+ '/getWishList'}" method="GET" >
+                <button type="submit"> view User Description </button>
+            </form>
+        </td>
+        <td th:text="${user.active} ? 'Active ': 'Inactive'"></td>
+        <td>
+            <form th:action="@{'/users/'+ ${user.id}+ '/status'}"  th:method="PUT">
+                <button type="submit"> Change Status </button>
+            </form>
+        </td>
+    </tr>
+</table>
+<button type="button"  >
+    <a id="goBack" th:href="@{/home}">Go back</a> </button>
+
+
+
+</body>
+</html>

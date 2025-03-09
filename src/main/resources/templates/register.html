@@ -38,29 +38,29 @@
             document.addEventListener("DOMContentLoaded", function () {
                 const registerButton = document.getElementById("registerButton");
                 const checkBox = document.getElementById("checkBox");
-                // Бутонът първоначално е забранен
+
                 registerButton.disabled = true;
-                // Флаг за дали потребителят вече е получил съобщението
+
                 let alertShown = false;
-                // Функция, която проверява дали checkbox-ът е маркиран
+
                 function updateButtonState() {
                     if (checkBox.checked) {
-                        registerButton.disabled = false; // Активиране на бутона
+                        registerButton.disabled = false;
                     } else {
-                        registerButton.disabled = true; // Деактивиране на бутона
+                        registerButton.disabled = true;
                     }
                 }
-                // Добавяне на event listener за промяна в checkbox-а
+
                 checkBox.addEventListener("change", function () {
                     updateButtonState();
                 });
-                // Ако потребителят се опита да кликне без да е маркирал Terms of Use
+
                 registerButton.addEventListener("mouseover", function (event) {
                     if (!checkBox.checked) {
-                        event.preventDefault(); // Спира натискането на бутона
+                        event.preventDefault();
                         if (!alertShown) {
                             alert("Check out Terms of Use");
-                            alertShown = false; // След като веднъж е показано, не се показва отново
+                            alertShown = false;
                         }
                     }
                 });

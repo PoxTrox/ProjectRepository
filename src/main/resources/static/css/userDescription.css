@@ -1,0 +1,37 @@
+body{
+    background: #605c5c
+}
+
+#descriptionTable{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+tr{
+    background: #488f50;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+
+}
+th{
+    background: #676733;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+}
+button{
+    background: #676733;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    color: white;
+    border-radius: 15px;
+    border-color: #0b0b05;
+    position: fixed;
+    top:4%;
+    left: 4%;
+}
+#goBack{
+    text-decoration: none;
+    color: hsl(60, 38%, 3%);
+}

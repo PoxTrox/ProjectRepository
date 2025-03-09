@@ -30,6 +30,9 @@
             <li>
                 <a th:href="@{/messages}" class="btn">Messages</a>
             </li>
+            <li th:if="${user.role.name == 'ADMIN'}">
+                <a th:href="@{/users/getAllUsers}"> Users</a>
+            </li>
             <li>
                 <a th:href="@{/logout}" class="btn">Logout</a>
 
@@ -44,7 +47,7 @@
     </div>
 </nav>
 <div class="Profile-section">
-    <img class="profile-img" th:src="${#strings.isEmpty(user.getProfilePic()) ? 'src/main/resources/static/images/Screenshot 2025-02-06 150211.png' : user.profilePic}"
+    <img class="profile-img" th:src="${#strings.isEmpty(user.getProfilePic()) ? 'https://cdn0.iconfinder.com/data/icons/cryptocurrency-137/128/1_profile_user_avatar_account_person-132-256.png' : user.profilePic}"
          alt="Profile Picture"></img>
 
 </div>
@@ -69,28 +72,43 @@
 <div class="details-section-container">
     <h3 th:text="${'Country you live in : '+ user.country}"></h3>
 </div>
-<br>
-<h2 id="h2Title">Last Added Item </h2>
+<h2 id="HomeH2Title">Last Added Item - Media </h2>
 
 <div class="LastAddedItem">
     <table>
         <tr>
-            <th>Media_Type</th>
-            <th>Title</th>
-            <th>Genre</th>
-            <th>Seasons</th>
+            <th style="width: 200px">Media_Type</th>
+            <th style="width: 333px">Title</th>
+            <th style="width: 150px">Genre</th>
+            <th style="width: 69px">Seasons</th>
             <th>Realise_Date</th>
         </tr>
-        <tr th:if="${not #lists.isEmpty(user.getShows())}" th:with="lastShow=${user.getShows()[#lists.size(user.getShows().size()-1)]}">
-            <td th:text="${lastShow.mediaType}"></td>
-            <td th:text="${lastShow.title}"></td>
-            <td th:text="${lastShow.genre}"></td>
-            <td th:text="${lastShow.season}"></td>
-            <td th:text="${#temporals.format(lastShow.releaseDate, 'dd MMM yyyy')}"> 2007</td>
+        <tr th:each="iter, stats : ${media}" th:if="${stats.count==1}">
+            <td th:text="${iter.mediaType}"></td>
+            <td th:text="${iter.title}"></td>
+            <td th:text="${iter.genre}"></td>
+            <td th:text="${iter.season}"></td>
+            <td th:text="${#temporals.format(iter.releaseDate, 'dd MMM yyyy')}"></td>
         </tr>
     </table>
-
 </div>
+<h2 id="BookH2">Last Added Item - Books </h2>
+
+<div class="LastAddedItem">
+    <table>
+        <tr>
+            <th style="width: 200px">Title</th>
+            <th style="width: 100px">Price</th>
+            <th style="width: 150px">Author</th>
+        </tr>
+        <tr th:each="iter, stats : ${books}" th:if="${stats.count==1}">
+            <td th:text="${iter.title}"></td>
+            <td th:text="${iter.price}"></td>
+            <td th:text="${iter.author.firstName +' ' + iter.author.lastName}"></td>
+        </tr>
+    </table>
+</div>
+
 
 <script>
     let time = document.getElementById('timeItIs');
@@ -100,6 +118,24 @@
         time.innerHTML = clock.toLocaleTimeString()
     }, 1000)
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+<script>
+    const socket = new SockJS('/ws');
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, function () {
+        console.log("Connected!");
+
+        stompClient.subscribe('/topic/reminders', function (message) {
+            alert(message.body);
+        });
+    });
+</script>
+
+<div id="output"></div>
 
 <footer class="footer">
 

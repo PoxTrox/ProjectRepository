@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UserDescription</title>
+  <link rel="stylesheet" th:href="@{/css/userDescription.css}">
+</head>
+<body>
+<table id="descriptionTable">
+  <tr>
+    <th  style="width: 250px">Title</th>
+    <th style="width: 1000px">Description</th>
+  </tr>
+  <tr th:each="wish : ${wishList}" >
+    <td th:text="${wish.title}"></td>
+    <td th:text="${wish.description}"></td>
+    <td> <a th:href="@{/user}"></a></td>
+  </tr>
+
+</table>
+<button type="button"  >
+  <a id="goBack" th:href="@{/users/getAllUsers}">Go back</a> </button>
+
+
+</body>
+</html>

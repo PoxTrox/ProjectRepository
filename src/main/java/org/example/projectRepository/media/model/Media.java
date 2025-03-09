@@ -5,6 +5,7 @@ import lombok.*;
 import org.example.projectRepository.user.model.User;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Builder
@@ -29,6 +30,9 @@ public class Media {
     private int season;
 
     private String genre;
+
+    @Column(nullable = false)
+    private LocalDateTime creationAt;
 
     @Enumerated(EnumType.STRING)
     private MediaType mediaType;

@@ -1,0 +1,44 @@
+body{
+    background: #302f2f;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+#userTable{
+    background: #302f2f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+tr{
+    background: #488f50;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+
+
+}
+th{
+    background: #676733;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+}
+button{
+    background: #676733;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    border-radius: 10px;
+}
+
+
+#goBack{
+    text-decoration: none;
+    position: fixed;
+    top: 4%;
+    left: 4%;
+    color: hsl(60, 38%, 3%);
+}

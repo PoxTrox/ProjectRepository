@@ -25,7 +25,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         http.authorizeHttpRequests(matchers -> matchers
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/", "/register","/TermOfUse").permitAll()
-                      //  .requestMatchers("/users").hasRole("ADMIN")
+                       .requestMatchers("/users/getAllUsers").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form.

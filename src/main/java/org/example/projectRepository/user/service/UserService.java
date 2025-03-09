@@ -115,4 +115,10 @@ public class UserService  implements UserDetailsService {
         return userRepository.findAll();
     }
 
+    public void changeStatus(UUID id) {
+
+        User user = getById(id);
+        user.setActive(!user.isActive());
+        userRepository.save(user);
+    }
 }

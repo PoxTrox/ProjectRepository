@@ -7,6 +7,7 @@ import org.example.projectRepository.author.model.Author;
 import org.example.projectRepository.user.model.User;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Builder
@@ -29,6 +30,9 @@ public class Book {
 
     @ManyToOne
     private Author author;
+
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
 
     @ManyToOne
     private User user;

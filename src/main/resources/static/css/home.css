@@ -132,10 +132,10 @@ h2{
     border: 1px solid hsl(0, 28%, 5%);
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 40%;
     padding: 10px 10px 10px 10px;
     margin-top: 50px;
-    margin-left: 450px;
+    margin-left: 740px;
     align-items: initial;
 }
 tr{
@@ -152,12 +152,14 @@ tr{
     font-size:18px;
 }
 
-#h2Title{
-    position: absolute;
+#HomeH2Title{
+    color: hsl(36, 56%, 20%);
+    position: fixed;
+    left: 32%;
+    top: 69%;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 20px;
-    top: 66%;
-    left: 20%;
+
 }
 .footer {
     color: rgba(113, 156, 64, 0.69);
@@ -168,11 +170,12 @@ tr{
     font-size: large;
     letter-spacing: 5px
 }
-#h2Title{
+#BookH2{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: large;
+    font-size: 20px;
+    color: hsl(36, 56%, 20%);
     position: fixed;
-    top: 41%;
-    left: 20%;
+    left: 32%;
+    top: 79.5%;
 }
 

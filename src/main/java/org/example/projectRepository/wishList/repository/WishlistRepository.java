@@ -13,8 +13,6 @@ import java.util.UUID;
 @Repository
 public interface WishlistRepository extends JpaRepository <WishList, UUID> {
 
-    Optional<WishList> findByTitleAndTypeEntertainment(String title, TypeEntertainment typeEntertainment);
-
     List<WishList>findAllByUserOrderByTitleAsc(User user);
 
     List<WishList>findAllByUserOrderByTitleDesc(User user);
@@ -31,6 +29,9 @@ public interface WishlistRepository extends JpaRepository <WishList, UUID> {
 
     List<WishList>findAllByUserOrderByCompletedDesc(User user);
 
+    List<WishList>findAllByUser(User user);
+
+    List<WishList>findAllByCompletedTrue();
 
 
 }

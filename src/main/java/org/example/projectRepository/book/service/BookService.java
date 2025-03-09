@@ -14,6 +14,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -37,19 +39,23 @@ public class BookService {
 
     public void saveBook(BookAuthorRequest bookAuthorRequest, User user) throws DomainException {
 
-        Optional<Author> author1 = authorService.findAuthor(bookAuthorRequest.getFirstName(), bookAuthorRequest.getLastName());
+//        Optional<Author> author = authorService.findAuthor(bookAuthorRequest.getFirstName(), bookAuthorRequest.getLastName());
 
-        if (author1.isEmpty()) {
-            Author newAuthor = new Author();
-            newAuthor.setFirstName(bookAuthorRequest.getFirstName());
-            newAuthor.setLastName(bookAuthorRequest.getLastName());
-            authorService.save(newAuthor);
-        }
 
+//        if (author.isEmpty()) {
+//            Author newAuthor = new Author();
+//            newAuthor.setFirstName(bookAuthorRequest.getFirstName());
+//            newAuthor.setLastName(bookAuthorRequest.getLastName());
+//            authorService.save(newAuthor);
+//        }
+        Optional<Author> savedAuthor = authorService.findAuthor(bookAuthorRequest.getFirstName(), bookAuthorRequest.getLastName());
+        Author author1 = savedAuthor.get();
+        LocalDateTime now = LocalDateTime.now();
         Book book = new Book();
         book.setTitle(bookAuthorRequest.getTitle());
         book.setPrice(bookAuthorRequest.getPrice());
-        book.setAuthor(author1.get());
+        book.setAuthor(author1);
+        book.setCreatedAt(now);
         book.setUser(user);
 
         bookRepository.save(book);
@@ -80,8 +86,10 @@ public class BookService {
         Book byId = findById(id);
         if (byId != null) {
             bookRepository.delete(byId);
+        }else {
+            throw new DomainException("Book with id " + id + " not found");
         }
-        throw new DomainException("Book with id " + id + " not found");
+
     }
 
 
@@ -99,5 +107,9 @@ public class BookService {
         editBook.setPrice(bookEditRequest.getPrice());
         editBook.setAuthor(byId);
         bookRepository.save(editBook);
+    }
+
+    public List<Book> returnAllBook(User user) {
+        return bookRepository.findAllByUserOrderByCreatedAtDesc(user);
     }
 }

@@ -14,8 +14,6 @@ import java.util.UUID;
 @Repository
 public interface BookRepository extends JpaRepository<Book, UUID> {
 
-    Optional<Book> findByTitle(String title);
-
     List<Book> findAllByUserOrderByTitleAsc(User user);
 
     List<Book> findAllByUserOrderByTitleDesc(User user);
@@ -27,4 +25,7 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
     List<Book> findAllByUserOrderByPriceAsc(User user);
 
     List<Book> findAllByUserOrderByPriceDesc(User user);
+
+    List<Book>findAllByUserOrderByCreatedAtDesc(User user);
+
 }

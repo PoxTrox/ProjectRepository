@@ -22,7 +22,7 @@ public class WishListRequest {
     @NotNull(message = "Field can't be empty")
     private TypeEntertainment typeEntertainment;
 
-    @Size(max = 200,message = "Description can't be more then 200 Characters ")
+    @Size(max = 100,message = "Description can't be more then 100 Characters ")
     private String description;
 
     @Positive

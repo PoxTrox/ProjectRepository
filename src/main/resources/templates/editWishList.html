@@ -20,7 +20,7 @@
 
 
   <label for="description">Description</label>
-  <input type="text" name="description" id="description" th:field="*{description}">
+  <input type="text" name="description" id="description"  th:field="*{description}">
     <p class="alert-warning" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
 
     <label for="seasons">Seasons</label>

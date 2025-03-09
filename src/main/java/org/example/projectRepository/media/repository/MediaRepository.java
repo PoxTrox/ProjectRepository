@@ -29,5 +29,9 @@ public interface MediaRepository extends JpaRepository<Media, UUID> {
 
     List<Media>findAllByUserOrderBySeasonDesc(User user);
 
+    List<Media>findAllByUserOrderByCreationAtDesc(User user);
+
+
+
 
 }

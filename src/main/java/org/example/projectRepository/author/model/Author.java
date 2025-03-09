@@ -27,7 +27,7 @@ public class Author {
     @Column(nullable = false)
     private String lastName;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "author", cascade = CascadeType.REMOVE)
     private List<Book> books = new ArrayList<>();
 
 }
