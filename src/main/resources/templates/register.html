@@ -17,6 +17,9 @@
             <label for="username">Username</label>
             <input type="text"  class="username-label" name="username" id="username" placeholder="Enter Username" th:field="*{username}" required>
             <p class="alert-warning" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+            <p class="alert"  th:text="${alreadyExist}"></p>
+
+
         </div>
 
         <div class="password">

@@ -6,6 +6,7 @@ import org.example.projectRepository.author.service.AuthorService;
 import org.example.projectRepository.book.model.Book;
 import org.example.projectRepository.book.service.BookService;
 import org.example.projectRepository.exception.DomainException;
+import org.example.projectRepository.exception.UserNameAlreadyExistException;
 import org.example.projectRepository.security.AuthenticationDetails;
 import org.example.projectRepository.user.model.User;
 import org.example.projectRepository.user.model.UserRole;
@@ -48,7 +49,7 @@ public class UserService  implements UserDetailsService {
 
         if (user.isPresent()) {
 
-            throw new DomainException("Username is already in use.( %s )".formatted(user.get().getUsername()));
+            throw new UserNameAlreadyExistException("Username is already in use.( %s )".formatted(user.get().getUsername()));
 
         }
 

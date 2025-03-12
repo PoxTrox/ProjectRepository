@@ -1,0 +1,13 @@
+a{
+    color: #0b0b05;
+    background-color: #afcf62;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+}
+.container {
+    position: fixed;
+    top: 59.4%;
+    left: 61.4%;
+}

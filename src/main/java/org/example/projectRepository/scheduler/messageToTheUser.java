@@ -17,8 +17,8 @@ public class messageToTheUser {
         this.messagingTemplate = messagingTemplate;
     }
 
-    @Scheduled(fixedRate = 100000)
+    @Scheduled(fixedRate = 600000)
     public void sendReminder() {
-        messagingTemplate.convertAndSend("/topic/reminders", "Време е за почивка! 🌿");
+        messagingTemplate.convertAndSend("/topic/reminders", "Please take a break! 🌿");
     }
 }

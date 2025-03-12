@@ -24,7 +24,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         http.authorizeHttpRequests(matchers -> matchers
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/register","/TermOfUse").permitAll()
+                        .requestMatchers("/","/register", "/TermOfUse").permitAll()
                        .requestMatchers("/users/getAllUsers").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
@@ -37,11 +37,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout","GET"))
                         .logoutSuccessUrl("/"));
-
-
-
-        ;
-
 
         return http.build();
 

@@ -34,6 +34,9 @@ public class UserController {
     @GetMapping("/{id}/profile")
     public ModelAndView profilePage (@PathVariable UUID id) {
 
+
+
+
         ModelAndView modelAndView = new ModelAndView();
         User user = userService.getById(id);
         modelAndView.addObject("user", user);
