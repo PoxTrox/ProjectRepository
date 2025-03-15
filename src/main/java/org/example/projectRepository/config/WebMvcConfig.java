@@ -32,7 +32,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                                 loginPage("/login")
 //                        .usernameParameter("username")
 //                        .passwordParameter("password")
-                                .defaultSuccessUrl("/home")
+                                .defaultSuccessUrl("/home",true)
                                 .failureUrl("/login?error").permitAll())
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout","GET"))

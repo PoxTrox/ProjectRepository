@@ -1,9 +1,9 @@
 package org.example.projectRepository.media.Service;
 
-import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.example.projectRepository.exception.DomainException;
 import org.example.projectRepository.media.model.Media;
+import org.example.projectRepository.media.model.MediaType;
 import org.example.projectRepository.media.repository.MediaRepository;
 import org.example.projectRepository.user.model.User;
 import org.example.projectRepository.user.service.UserService;
@@ -14,11 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -46,7 +43,21 @@ public class MediaService {
                 .mediaType(mediaTvshowRequest.getMediaType())
                 .user(currenUser)
                 .creationAt(now)
+                .season(mediaTvshowRequest.getSeasons())
                 .build();
+        mediaRepository.save(media);
+    }
+
+    public void saveMediaFromRest(Media restMediaRequest, User user) {
+        User currenUser = userService.getById(user.getId());
+        LocalDateTime now = LocalDateTime.now();
+        Media media = Media.builder()
+                .title(restMediaRequest.getTitle())
+                .releaseDate(LocalDate.parse(restMediaRequest.getReleaseDate().toString()))
+                .mediaType(MediaType.MOVIE)
+                .creationAt(now)
+                .user(currenUser)
+                .season(1).build();
         mediaRepository.save(media);
     }
 

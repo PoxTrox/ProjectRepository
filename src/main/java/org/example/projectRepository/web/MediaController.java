@@ -1,6 +1,7 @@
 package org.example.projectRepository.web;
 
 import jakarta.validation.Valid;
+import org.example.projectRepository.client.SearchClient;
 import org.example.projectRepository.media.Service.MediaService;
 import org.example.projectRepository.media.model.Media;
 import org.example.projectRepository.security.AuthenticationDetails;
@@ -8,8 +9,10 @@ import org.example.projectRepository.user.model.User;
 import org.example.projectRepository.user.service.UserService;
 import org.example.projectRepository.web.dto.MediaTvshowRequest;
 import org.example.projectRepository.web.dto.MovieTvShowEditRequest;
+import org.example.projectRepository.web.dto.RestMediaRequest;
 import org.example.projectRepository.web.mapper.MovieTvshowDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,11 +30,13 @@ public class MediaController {
 
     private final UserService userService;
     private final MediaService mediaService;
+    private final SearchClient searchClient;
 
     @Autowired
-    public MediaController(UserService userService, MediaService mediaService) {
+    public MediaController(UserService userService, MediaService mediaService, SearchClient searchClient) {
         this.userService = userService;
         this.mediaService = mediaService;
+        this.searchClient = searchClient;
     }
 
 
@@ -62,8 +68,8 @@ public class MediaController {
     }
 
     @PostMapping("/movie/tvshow/add")
-    public ModelAndView postMediaPage(@Valid MediaTvshowRequest mediaTvshowRequest, BindingResult bindingResult,  @AuthenticationPrincipal AuthenticationDetails authenticationDetails
-                                      ) {
+    public ModelAndView postMediaPage(@Valid MediaTvshowRequest mediaTvshowRequest, BindingResult bindingResult, @AuthenticationPrincipal AuthenticationDetails authenticationDetails
+    ) {
 
         ModelAndView modelAndView = new ModelAndView();
         User user = userService.getById(authenticationDetails.getUserId());
@@ -97,10 +103,10 @@ public class MediaController {
 
 
     @PutMapping("/{id}/edit")
-    public ModelAndView postEditMediaTvShow(@PathVariable UUID id , @AuthenticationPrincipal AuthenticationDetails authenticationDetails, @Valid MovieTvShowEditRequest movieTvShowEditRequest,
+    public ModelAndView postEditMediaTvShow(@PathVariable UUID id, @AuthenticationPrincipal AuthenticationDetails authenticationDetails, @Valid MovieTvShowEditRequest movieTvShowEditRequest,
                                             BindingResult bindingResult) {
 
-    ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView();
         Media byId = mediaService.findById(id);
         User user = userService.getById(authenticationDetails.getUserId());
 
@@ -121,6 +127,48 @@ public class MediaController {
         mediaService.removeBy(id);
         return "redirect:/Media/movie/tvshow";
     }
+
+
+    @GetMapping()
+    public ModelAndView search(@AuthenticationPrincipal AuthenticationDetails authenticationDetails
+            ) {
+        List<Media>mediaList = new ArrayList<>();
+        ModelAndView modelAndView = new ModelAndView();
+        User user = userService.getById(authenticationDetails.getUserId());
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("mediaList", mediaList);
+        modelAndView.addObject("mediaTvshowRequest",new RestMediaRequest ());
+        modelAndView.setViewName("searchPage");
+        return modelAndView;
+    }
+
+    @GetMapping("/search")
+    public ModelAndView searchResult(@AuthenticationPrincipal AuthenticationDetails authenticationDetails
+            , @RequestParam(name = "title") String title) {
+        List<Media>mediaList = searchClient.searchAndSaveMedia(title);
+        ModelAndView modelAndView = new ModelAndView();
+        User user = userService.getById(authenticationDetails.getUserId());
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("mediaList", mediaList);
+        modelAndView.setViewName("searchPage");
+        return modelAndView;
+}
+    @PostMapping("/search")
+    public ModelAndView saveMediaByTitle(  RestMediaRequest request, @AuthenticationPrincipal AuthenticationDetails authenticationDetails) {
+        Media media = searchClient.mediaByTitleAndReleaseDate(request.getTitle(), request.getReleaseDate());
+
+        User user = userService.getById(authenticationDetails.getUserId());
+
+
+        mediaService.saveMediaFromRest(media,user);
+      return new ModelAndView("redirect:/Media/movie/tvshow");
+
+    }
+
+
+
+
+
 
 
 }

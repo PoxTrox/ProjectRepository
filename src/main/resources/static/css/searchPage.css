@@ -1,0 +1,42 @@
+body{
+    background: #605c5c
+}
+
+.search{
+    position: fixed;
+    top: 10%;
+    left: 42%;
+    text-align: center;
+    font-size: 28px;
+    width: 400px;
+
+}
+input{
+    width: 300px;
+    text-align: center;
+    font-size: 27px;
+}
+
+#listOfMedia tr {
+    background-color: hsl(40, 25%, 24%);
+    display: block;
+    text-align: center;
+    color: white;
+}
+#SearchResults td{
+    background-color: hsl(39, 27%, 41%);
+    width: auto;
+    text-align: center;
+}
+#SearchResults th{
+    width: 400px;
+    text-align: center;
+
+}
+#SearchResults{
+    background-color: hsl(60, 17%, 27%);
+
+}
+table{
+    margin: 200px 350px
+}
