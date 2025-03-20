@@ -9,12 +9,14 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class RestMediaRequest {
+@NoArgsConstructor
+public class RestMediaRequest{
     @Column(nullable = false)
     private String title;
 
     @Column(nullable = false)
     private String releaseDate;
+
+
 }

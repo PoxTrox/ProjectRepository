@@ -1,9 +1,11 @@
 package org.example.projectRepository.web;
 
 import jakarta.validation.Valid;
-import org.example.projectRepository.client.SearchClient;
+
 import org.example.projectRepository.media.Service.MediaService;
 import org.example.projectRepository.media.model.Media;
+import org.example.projectRepository.search.SearchClient;
+import org.example.projectRepository.search.service.SearchService;
 import org.example.projectRepository.security.AuthenticationDetails;
 import org.example.projectRepository.user.model.User;
 import org.example.projectRepository.user.service.UserService;
@@ -37,6 +39,8 @@ public class MediaController {
         this.userService = userService;
         this.mediaService = mediaService;
         this.searchClient = searchClient;
+
+
     }
 
 
@@ -131,7 +135,7 @@ public class MediaController {
 
     @GetMapping()
     public ModelAndView search(@AuthenticationPrincipal AuthenticationDetails authenticationDetails
-            ) {
+    ) {
         List<Media>mediaList = new ArrayList<>();
         ModelAndView modelAndView = new ModelAndView();
         User user = userService.getById(authenticationDetails.getUserId());
@@ -145,23 +149,29 @@ public class MediaController {
     @GetMapping("/search")
     public ModelAndView searchResult(@AuthenticationPrincipal AuthenticationDetails authenticationDetails
             , @RequestParam(name = "title") String title) {
-        List<Media>mediaList = searchClient.searchAndSaveMedia(title);
+        List<Media> mediaList = searchClient.searchAndSaveMedia(title);
         ModelAndView modelAndView = new ModelAndView();
         User user = userService.getById(authenticationDetails.getUserId());
         modelAndView.addObject("user", user);
         modelAndView.addObject("mediaList", mediaList);
         modelAndView.setViewName("searchPage");
         return modelAndView;
-}
-    @PostMapping("/search")
+    }
+    @PostMapping("/search/save")
     public ModelAndView saveMediaByTitle(  RestMediaRequest request, @AuthenticationPrincipal AuthenticationDetails authenticationDetails) {
-        Media media = searchClient.mediaByTitleAndReleaseDate(request.getTitle(), request.getReleaseDate());
 
-        User user = userService.getById(authenticationDetails.getUserId());
+        try{
+            Media media = searchClient.mediaByTitleAndReleaseDate(request.getTitle(), request.getReleaseDate());
+
+            User user = userService.getById(authenticationDetails.getUserId());
 
 
-        mediaService.saveMediaFromRest(media,user);
-      return new ModelAndView("redirect:/Media/movie/tvshow");
+            mediaService.saveMediaFromRest(media,user);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return new ModelAndView("redirect:/Media/movie/tvshow");
 
     }
 

@@ -7,6 +7,7 @@ import org.example.projectRepository.book.model.Book;
 import org.example.projectRepository.book.service.BookService;
 import org.example.projectRepository.exception.DomainException;
 import org.example.projectRepository.exception.UserNameAlreadyExistException;
+import org.example.projectRepository.exception.UserWithIdDoesNotExist;
 import org.example.projectRepository.security.AuthenticationDetails;
 import org.example.projectRepository.user.model.User;
 import org.example.projectRepository.user.model.UserRole;
@@ -53,7 +54,6 @@ public class UserService  implements UserDetailsService {
 
         }
 
-
         User newUSer = userRepository.save(initializeUser(registerRequest));
 
 
@@ -66,23 +66,20 @@ public class UserService  implements UserDetailsService {
     private User initializeUser(RegisterRequest registerRequest) {
 
         if(getAllUsers().isEmpty()) {
-            return  User.builder()
+            return User.builder()
                     .username(registerRequest.getUsername())
                     .password(passwordEncoder.encode(registerRequest.getPassword()))
                     .role(UserRole.ADMIN)
                     .isActive(true)
-                    .build();
+                    .age(18).build();
         }else {
             return User.builder()
                     .username(registerRequest.getUsername())
                     .password(passwordEncoder.encode(registerRequest.getPassword()))
                     .role(UserRole.USER)
                     .isActive(true)
-                    .build();
+                    .age(18).build();
         }
-
-
-
 
     }
     @Transactional
@@ -106,7 +103,7 @@ public class UserService  implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new DomainException("User with name [%s] does not exist.".formatted(username)));
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UserWithIdDoesNotExist("User with name [%s] does not exist.".formatted(username)));
 
         return new AuthenticationDetails(user.getId(),user.getUsername(),user.getPassword(),user.getRole(),user.isActive());
 

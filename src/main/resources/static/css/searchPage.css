@@ -7,7 +7,7 @@ body{
     top: 10%;
     left: 42%;
     text-align: center;
-    font-size: 28px;
+    font-size: 30px;
     width: 400px;
 
 }
@@ -39,4 +39,19 @@ input{
 }
 table{
     margin: 200px 350px
+}
+.toGoBack{
+    position: fixed;
+    top: 10%;
+    left: 35%;
+    font-size: 20px;
+    padding: 8px;
+
+}
+.toGoBack a {
+    color: #1b3277;
+    text-decoration: none;
+}
+.search button{
+    padding: 10px;
 }

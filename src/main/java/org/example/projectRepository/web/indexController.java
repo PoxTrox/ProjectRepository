@@ -3,8 +3,7 @@ package org.example.projectRepository.web;
 import jakarta.validation.Valid;
 import org.example.projectRepository.book.model.Book;
 import org.example.projectRepository.book.service.BookService;
-import org.example.projectRepository.client.SearchClient;
-import org.example.projectRepository.exception.UserNameAlreadyExistException;
+import org.example.projectRepository.search.SearchClient;
 import org.example.projectRepository.media.Service.MediaService;
 import org.example.projectRepository.media.model.Media;
 import org.example.projectRepository.security.AuthenticationDetails;
@@ -13,7 +12,6 @@ import org.example.projectRepository.user.service.UserService;
 import org.example.projectRepository.web.dto.LoginRequest;
 import org.example.projectRepository.web.dto.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 
 @Controller
@@ -113,16 +110,16 @@ public class indexController {
         return new ModelAndView("termsOfUse");
     }
 
-    @GetMapping("/search")
-    public ModelAndView getSearchPage(@AuthenticationPrincipal AuthenticationDetails authenticationDetails) {
-
-        UUID userId = authenticationDetails.getUserId();
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject(userId);
-        modelAndView.setViewName("searchPage");
-        return modelAndView;
-
-    }
+//    @GetMapping("/search")
+//    public ModelAndView getSearchPage(@AuthenticationPrincipal AuthenticationDetails authenticationDetails) {
+//
+//        UUID userId = authenticationDetails.getUserId();
+//
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.addObject(userId);
+//        modelAndView.setViewName("searchPage");
+//        return modelAndView;
+//
+//    }
 
 }

@@ -1,51 +1,57 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Search</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Search page result</title>
+    <link rel="stylesheet" th:href="@{/css/searchPage.css}">
 </head>
-<body  style="background-color: #605c5c">
+<body>
+<button class="toGoBack">
+    <a th:href="@{/home}">Go back</a>
+</button>
 
-<h1 class="mb-4">Search Movies</h1>
-
-<!-- Форма за търсене -->
-<form th:action="@{/Media/search}" method="get" class="d-flex mb-4">
-    <input type="text" name="title" class="form-control me-2" placeholder="Enter movie title..." required>
-    <button type="submit" class="btn btn-primary">Search</button>
+<form th:action="@{/Media/search}" method="get" class="search">
+    <input type="text" name="title" placeholder="Search..by title  in TMDB database for result">
+    <button type="submit">Search</button>
 </form>
 
-<!-- Показване на съобщение при успешно запазване -->
-<div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+<form>
 
-<!-- Показване на резултатите от търсенето -->
-<div th:if="${mediaList}" class="mt-3">
-    <h2>Search Results</h2>
-    <table class="table table-bordered">
-        <thead>
+    <table id="SearchResults">
         <tr>
-            <th>Title</th>
-            <th>ReleaseDate</th>
+            <th style="width: 600px">Title</th>
+            <th>Release_Date</th>
+            <th>overView</th>
+            <th>userScore</th>
+            <th>genre</th>
             <th>Save to your List</th>
-            <th>Actions</th>
+            <th>Save to your wishList</th>
         </tr>
-        </thead>
-        <tbody>
-        <tr th:each="media : ${mediaList}">
-            <td th:text="${media.title}"></td>
-            <td th:text="${media.releaseDate}"></td>
+        <tr th:each="result : ${mediaList}">
+            <td th:text="${result.title}"> </td>
+            <td th:text="${result.releaseDate}"> </td>
+            <td  > </td>
+            <td></td>
+            <td> </td>
             <td>
-                <form th:action="@{/Media/search}" method="post">
-                    <input type="hidden" name="title" th:value="${media.title}">
-                    <input type="hidden" name="releaseDate" th:value="${media.releaseDate}">
+                <form th:action="@{/Media/search/save}" th:method="POST">
+                    <input type="hidden" name="title" th:value="${result.title}">
+                    <input type="hidden" name="releaseDate" th:value="${result.releaseDate}">
                     <button type="submit" class="btn btn-success">Save</button>
                 </form>
             </td>
+            <td>
+                <a th:href="@{#}">save to media</a>
+            </td>
         </tr>
-        </tbody>
     </table>
-</div>
+
+
+
+</form>
 
 </body>
 </html>

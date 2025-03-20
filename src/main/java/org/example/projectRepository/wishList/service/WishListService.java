@@ -40,7 +40,7 @@ public class WishListService {
                 .creationDate(LocalDate.now())
                 .typeEntertainment(wishListRequest.getTypeEntertainment())
                 .user(user1)
-                .build();
+                .seasons(wishListRequest.getSeasons()).build();
         wishlistRepository.save(newWishMedia);
     }
 
