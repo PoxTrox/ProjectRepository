@@ -1,8 +1,6 @@
 package org.example.projectRepository.media;
 
 
-import org.example.projectRepository.book.model.Book;
-import org.example.projectRepository.book.service.BookService;
 import org.example.projectRepository.exception.DomainException;
 import org.example.projectRepository.media.Service.MediaService;
 import org.example.projectRepository.media.model.Media;
@@ -18,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
@@ -120,12 +117,14 @@ public class MediaUTest {
                 .releaseDate(String.valueOf(LocalDate.from(LocalDateTime.now())))
                 .seasons(1)
                 .build();
+
         UUID uuid = UUID.randomUUID();
         Media media = Media.builder()
                 .id(uuid)
                 .season(1)
                 .build();
         when(mediaRepository.findById(uuid)).thenReturn(Optional.of(media));
+
         mediaService.editMedia(media.getId(), movieTvShowEditRequest);
         verify(mediaRepository, times(1)).findById(uuid);
         assertThat(media.getTitle()).isEqualTo(movieTvShowEditRequest.getTitle());

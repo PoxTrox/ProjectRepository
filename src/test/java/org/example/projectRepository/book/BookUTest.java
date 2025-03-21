@@ -5,38 +5,33 @@ import org.example.projectRepository.author.service.AuthorService;
 import org.example.projectRepository.book.model.Book;
 import org.example.projectRepository.book.repository.BookRepository;
 import org.example.projectRepository.book.service.BookService;
-;
+
 import org.example.projectRepository.exception.DomainException;
 import org.example.projectRepository.user.model.User;
 import org.example.projectRepository.web.dto.BookAuthorRequest;
 import org.example.projectRepository.web.dto.BookEditRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import org.mockito.Mockito;
+
 import org.mockito.junit.jupiter.MockitoExtension;
 
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Stream;
+
 
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.StatusResultMatchersExtensionsKt.isEqualTo;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -96,13 +91,14 @@ public class BookUTest {
     void whenTryingToSaveABookButAlreadyExists_throwsException() {
 
 
-        Book book = Book.builder()
-                .title("title")
-                .build();
 
         Author author = Author.builder()
                 .firstName("John")
                 .lastName("Doe")
+                .build();
+        Book book = Book.builder()
+                .title("title")
+                .author(author)
                 .build();
 
         when(bookRepository.findByTitleAndAuthor(book.getTitle(), author)).thenThrow(DomainException.class);

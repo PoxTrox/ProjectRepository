@@ -5,6 +5,7 @@ import org.example.projectRepository.user.model.User;
 import org.example.projectRepository.user.service.UserService;
 import org.example.projectRepository.web.dto.WishListEditRequest;
 import org.example.projectRepository.web.dto.WishListRequest;
+import org.example.projectRepository.wishList.model.TypeEntertainment;
 import org.example.projectRepository.wishList.model.WishList;
 import org.example.projectRepository.wishList.repository.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -32,6 +34,10 @@ public class WishListService {
 
         User user1 = userService.getById(user.getId());
 
+        Optional<WishList> byTitleAndTypeEntertainment = wishlistRepository.findByTitleAndTypeEntertainment(wishListRequest.getTitle(), wishListRequest.getTypeEntertainment());
+        if(byTitleAndTypeEntertainment.isPresent()) {
+            throw new DomainException("Wishlist with title " + wishListRequest.getTitle() + " already exists");
+        }
 
         WishList newWishMedia = WishList.builder()
                 .title(wishListRequest.getTitle())
@@ -94,6 +100,15 @@ public class WishListService {
     public List<WishList> returnWishListCompleted() {
 
         return wishlistRepository.findAllByCompletedTrue();
+    }
+
+    public WishList returnWishListByTitle(String title, TypeEntertainment typeEntertainment) {
+
+        Optional<WishList> byTitleAndTypeEntertainment = wishlistRepository.findByTitleAndTypeEntertainment(title, typeEntertainment);
+        if(byTitleAndTypeEntertainment.isEmpty()) {
+            throw new DomainException("Wishlist with title " + title + " not found");
+        }
+        return byTitleAndTypeEntertainment.get();
     }
 
 }
