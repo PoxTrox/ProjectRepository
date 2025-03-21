@@ -16,10 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,24 +36,21 @@ public class BookService {
 
     public void saveBook(BookAuthorRequest bookAuthorRequest, User user) throws DomainException {
 
-//        Optional<Author> author = authorService.findAuthor(bookAuthorRequest.getFirstName(), bookAuthorRequest.getLastName());
 
+        Author author = authorService.findAuthor(bookAuthorRequest.getFirstName(), bookAuthorRequest.getLastName())
+                .orElseThrow(() -> new DomainException("Author not found"));
 
-//        if (author.isEmpty()) {
-//            Author newAuthor = new Author();
-//            newAuthor.setFirstName(bookAuthorRequest.getFirstName());
-//            newAuthor.setLastName(bookAuthorRequest.getLastName());
-//            authorService.save(newAuthor);
-//        }
-        Optional<Author> savedAuthor = authorService.findAuthor(bookAuthorRequest.getFirstName(), bookAuthorRequest.getLastName());
-        Author author1 = savedAuthor.get();
-        LocalDateTime now = LocalDateTime.now();
-        Book book = new Book();
-        book.setTitle(bookAuthorRequest.getTitle());
-        book.setPrice(bookAuthorRequest.getPrice());
-        book.setAuthor(author1);
-        book.setCreatedAt(now);
-        book.setUser(user);
+        if (bookRepository.findByTitleAndAuthor(bookAuthorRequest.getTitle(), author).isPresent()) {
+            throw new DomainException("Book with this title and author already exists");
+        }
+
+        Book book = Book.builder()
+                .title(bookAuthorRequest.getTitle())
+                .price(bookAuthorRequest.getPrice())
+                .author(author)
+                .createdAt(LocalDateTime.now())
+                .user(user)
+                .build();
 
         bookRepository.save(book);
     }
@@ -68,38 +62,37 @@ public class BookService {
             return bookRepository.findAllByUserOrderByTitleAsc(user);
         } else if (sortedBy.equals("title") && direction.equals("desc")) {
             return bookRepository.findAllByUserOrderByTitleDesc(user);
-        }else if(sortedBy.equals("Author") && direction.equals("asc")) {
+        } else if (sortedBy.equals("Author") && direction.equals("asc")) {
             return bookRepository.findAllByUserOrderByAuthorAsc(user);
-        }else if(sortedBy.equals("Author") && direction.equals("desc")) {
+        } else if (sortedBy.equals("Author") && direction.equals("desc")) {
             return bookRepository.findAllByUserOrderByAuthorDesc(user);
-        }else if(sortedBy.equals("price") && direction.equals("asc")) {
+        } else if (sortedBy.equals("price") && direction.equals("asc")) {
             return bookRepository.findAllByUserOrderByPriceAsc(user);
-        }else  {
+        } else {
             return bookRepository.findAllByUserOrderByPriceDesc(user);
         }
 
     }
+
     @Transactional
     @Modifying
     @Query("DELETE FROM Book b WHERE b.id = :id")
     public void deleteBookById(UUID id) {
-        Book byId = findById(id);
-        if (byId != null) {
-            bookRepository.delete(byId);
-        }else {
-            throw new DomainException("Book with id " + id + " not found");
-        }
+
+        bookRepository.findById(id).orElseThrow(() -> new DomainException("Book not found"));
+        bookRepository.deleteById(id);
+
 
     }
 
 
     public Book findById(UUID id) {
-        return bookRepository.findById(id).orElseThrow(() -> new DomainException("Book not found"));
+        return bookRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Book not found"));
     }
 
-    public void editBook(UUID id, BookEditRequest bookEditRequest) {
+    public void editBook(UUID bookId, BookEditRequest bookEditRequest) {
 
-        Optional<Book> book = bookRepository.findById(id);
+        Optional<Book> book = bookRepository.findById(bookId);
 
         Book editBook = book.get();
         Author byId = authorService.findById(book.get().getAuthor().getId());

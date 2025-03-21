@@ -28,4 +28,8 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
 
     List<Book>findAllByUserOrderByCreatedAtDesc(User user);
 
+    Optional<Book> findByTitleAndAuthor(String title, Author author);
+
+    List<Book> findAllByUser(User user);
+
 }

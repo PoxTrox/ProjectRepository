@@ -24,6 +24,7 @@ public class AuthorService {
 
     public Optional<Author> findAuthor(String firstName, String lastName) throws DomainException {
 
+
         return authorRepository.findByFirstNameAndLastName(firstName, lastName);
     }
 

@@ -1,6 +1,5 @@
-package org.example.projectRepository.Users;
+package org.example.projectRepository.user;
 
-import org.example.projectRepository.exception.DomainException;
 import org.example.projectRepository.exception.UserNameAlreadyExistException;
 import org.example.projectRepository.exception.UserWithIdDoesNotExist;
 import org.example.projectRepository.user.model.User;
@@ -11,6 +10,9 @@ import org.example.projectRepository.web.dto.ProfileEditRequest;
 import org.example.projectRepository.web.dto.RegisterRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -20,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -156,6 +159,24 @@ public class UserServiceUTest {
     }
 
     @Test
+    void tryingToFindUserByThereId(){
+        User test = User.builder()
+                .username("username")
+                .password("password")
+                .age(18)
+                .id(UUID.randomUUID())
+                .isActive(true)
+                .build();
+
+        when(userRepository.findById(test.getId())).thenReturn(Optional.of(test));
+        User user = userService.getById(test.getId());
+        verify(userRepository, times(1)).findById(test.getId());
+        assertThat(userService.getById(test.getId())).isEqualTo(user);
+
+    }
+
+
+    @Test
     void whenChangingStatusOnUser_UserStatusIsNowInActive() {
 
         User test = User.builder()
@@ -225,9 +246,26 @@ public class UserServiceUTest {
         verify(userRepository, times(1)).findById(user.getId());
         verify(userRepository,times(1)).save(user);
 
-
-
     }
+
+//    @ParameterizedTest
+//    @MethodSource("userRolesArguments")
+//    void whenChangeUserRole_correctRoleSet(UserRole userRole, UserRole expectedRole) {
+//
+//
+//        UUID userId = UUID.randomUUID();
+//
+//        User user = User.builder().id(userId).role(userRole).isActive(true).age(19).build();
+//        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
+//
+//        userService.changeUserRole(user.getId());
+//        assertEquals(expectedRole, user.getRole());
+//
+//    }
+//
+//    private static Stream<Arguments> userRolesArguments() {
+//        return Stream.of(Arguments.of(UserRole.USER,UserRole.ADMIN),Arguments.of(UserRole.ADMIN,UserRole.USER));
+//    }
 
 
 }

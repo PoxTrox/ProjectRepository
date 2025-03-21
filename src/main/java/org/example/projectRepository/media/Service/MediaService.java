@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -35,6 +36,11 @@ public class MediaService {
 
 
         User currenUser = userService.getById(user.getId());
+
+
+        if(currenUser == null) {
+            throw new DomainException("User not found");
+        }
         LocalDateTime now = LocalDateTime.now();
         Media media = Media.builder()
                 .title(mediaTvshowRequest.getTitle())
@@ -103,6 +109,7 @@ public class MediaService {
 
     public void removeBy(UUID id) {
 
+        mediaRepository.findById(id).orElseThrow(() -> new DomainException("Media not found"));
         mediaRepository.deleteById(id);
     }
 
