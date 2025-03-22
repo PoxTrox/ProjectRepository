@@ -366,5 +366,55 @@ public class BookUTest {
 
     }
 
+    @Test
+    void whenTryingToSaveABook_not_Successfully() {
+
+
+
+        Author author = Author.builder()
+                .firstName("John")
+                .lastName("Doe")
+                .build();
+
+        BookAuthorRequest bookAuthorRequest = BookAuthorRequest.builder()
+                .title("title")
+                .price(BigDecimal.valueOf(19.99))
+                .firstName("John")
+                .lastName("Doe")
+                .build();
+
+        Book book = Book.builder()
+                .author(author)
+                .title("title")
+                .build();
+
+        User user = User.builder()
+                .firstName("Pesho")
+                .lastName("PeshoTest")
+                .age(19)
+                .isActive(true)
+                .build();
+
+        when(authorService.findAuthor(author.getFirstName(), author.getLastName())).thenReturn(Optional.of(author));
+        // when(bookRepository.findByTitleAndAuthor(bookAuthorRequest.getTitle(),author)).thenThrow(DomainException.class);
+        when(bookRepository.findByTitleAndAuthor(bookAuthorRequest.getTitle(),author)).thenReturn(Optional.of(book));
+
+        Optional<Author> author1 = authorService.findAuthor(author.getFirstName(), author.getLastName());
+
+
+//        bookService.saveBook(bookAuthorRequest, user);
+
+
+        assertThrows(DomainException.class, () -> bookRepository.findByTitleAndAuthor(book.getTitle(),author1.get()));
+        //  assertThrows(DomainException.class, () -> bookService.saveBook(bookAuthorRequest,user));
+
+//        assertThat(author1.get().getFirstName()).isEqualTo(author.getFirstName());
+//
+//        assertThat(author1.get().getLastName()).isEqualTo(author.getLastName());
+//
+//        verify(authorService, times(2)).findAuthor(author.getFirstName(), author.getLastName());
+
+    }
+
 }
 

@@ -27,7 +27,7 @@ public class ProfileEditRequest {
     @Size(max = 100,message = "Country name can't be more then 100 symbols")
     private String country;
 
-    @URL(message = "Enter Valid URL")
+    @URL(message = "message = Enter a valid URL starting with http:// or https://")
     private String profilePicture;
 
 }

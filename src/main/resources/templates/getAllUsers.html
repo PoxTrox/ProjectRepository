@@ -12,6 +12,7 @@
     <tr>
         <th  style="width: 250px">User-name</th>
         <th style="width: 1000px">Description</th>
+        <th> Role</th>
         <th> status</th>
 
     </tr>
@@ -22,12 +23,22 @@
                 <button type="submit"> view User Description </button>
             </form>
         </td>
+        <td th:text="${user.role}"></td>
+
         <td th:text="${user.active} ? 'Active ': 'Inactive'"></td>
         <td>
             <form th:action="@{'/users/'+ ${user.id}+ '/status'}"  th:method="PUT">
                 <button type="submit"> Change Status </button>
             </form>
         </td>
+        <td>
+            <form th:action="@{'/users/'+ ${user.id}+ '/role'}"  th:method="PUT">
+                <button type="submit"> Change Role </button>
+            </form>
+        </td>
+
+
+
     </tr>
 </table>
 <button type="button"  >

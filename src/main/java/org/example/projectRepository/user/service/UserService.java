@@ -119,4 +119,16 @@ public class UserService  implements UserDetailsService {
         user.setActive(!user.isActive());
         userRepository.save(user);
     }
+
+    public void changeUserRole(UUID id) {
+
+        User byId = getById(id);
+
+        if(byId.getRole() == UserRole.USER) {
+            byId.setRole(UserRole.ADMIN);
+        }else {
+            byId.setRole(UserRole.USER);
+        }
+        userRepository.save(byId);
+    }
 }

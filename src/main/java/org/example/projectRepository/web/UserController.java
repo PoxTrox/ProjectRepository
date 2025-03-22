@@ -41,7 +41,7 @@ public class UserController {
         User user = userService.getById(id);
         modelAndView.addObject("user", user);
         modelAndView.setViewName("editProfile");
-        modelAndView.addObject("profileEdit", DtoMapper.mapToProfileEditRequest(user));
+        modelAndView.addObject("profileEditRequest", DtoMapper.mapToProfileEditRequest(user));
         return modelAndView;
     }
 
@@ -54,7 +54,7 @@ public class UserController {
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.addObject("user", user);
             modelAndView.setViewName("editProfile");
-            modelAndView.addObject("profileEdit", profileEditRequest);
+            modelAndView.addObject("profileEditRequest", profileEditRequest);
             return modelAndView;
         }
         userService.editProfileUser(id, profileEditRequest);
@@ -76,6 +76,15 @@ public class UserController {
 
         userService.changeStatus(id);
         return "redirect:/users/getAllUsers";
+    }
+
+    @PutMapping("/{id}/role")
+    public String updateProfileRole(@PathVariable UUID id) {
+
+        userService.changeUserRole(id);
+
+        return "redirect:/users/getAllUsers";
+
     }
 
     @GetMapping("{id}/getWishList")

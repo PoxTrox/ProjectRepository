@@ -248,24 +248,24 @@ public class UserServiceUTest {
 
     }
 
-//    @ParameterizedTest
-//    @MethodSource("userRolesArguments")
-//    void whenChangeUserRole_correctRoleSet(UserRole userRole, UserRole expectedRole) {
-//
-//
-//        UUID userId = UUID.randomUUID();
-//
-//        User user = User.builder().id(userId).role(userRole).isActive(true).age(19).build();
-//        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
-//
-//        userService.changeUserRole(user.getId());
-//        assertEquals(expectedRole, user.getRole());
-//
-//    }
-//
-//    private static Stream<Arguments> userRolesArguments() {
-//        return Stream.of(Arguments.of(UserRole.USER,UserRole.ADMIN),Arguments.of(UserRole.ADMIN,UserRole.USER));
-//    }
+    @ParameterizedTest
+    @MethodSource("userRolesArguments")
+    void whenChangeUserRole_correctRoleSet(UserRole userRole, UserRole expectedRole) {
+
+
+        UUID userId = UUID.randomUUID();
+
+        User user = User.builder().id(userId).role(userRole).isActive(true).age(19).build();
+        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
+
+        userService.changeUserRole(user.getId());
+        assertEquals(expectedRole, user.getRole());
+
+    }
+
+    private static Stream<Arguments> userRolesArguments() {
+        return Stream.of(Arguments.of(UserRole.USER,UserRole.ADMIN),Arguments.of(UserRole.ADMIN,UserRole.USER));
+    }
 
 
 }
