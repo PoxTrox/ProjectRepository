@@ -1,17 +1,20 @@
 package org.example.projectRepository.media.repository;
 
 import org.example.projectRepository.media.model.Media;
+import org.example.projectRepository.media.model.MediaType;
 import org.example.projectRepository.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 @Repository
 public interface MediaRepository extends JpaRepository<Media, UUID> {
 
-    Optional<Media> findByTitle(String title);
+    Optional<Media> findByTitleAndMediaTypeAndReleaseDate(String title, MediaType mediaType, LocalDate releaseDate);
 
     List<Media> findAllByUserOrderByTitleAsc(User user);
 
@@ -30,6 +33,8 @@ public interface MediaRepository extends JpaRepository<Media, UUID> {
     List<Media>findAllByUserOrderBySeasonDesc(User user);
 
     List<Media>findAllByUserOrderByCreationAtDesc(User user);
+
+
 
 
 

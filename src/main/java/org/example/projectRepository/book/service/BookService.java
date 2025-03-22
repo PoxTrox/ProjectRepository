@@ -5,6 +5,7 @@ import org.example.projectRepository.author.model.Author;
 import org.example.projectRepository.author.service.AuthorService;
 import org.example.projectRepository.book.model.Book;
 import org.example.projectRepository.book.repository.BookRepository;
+import org.example.projectRepository.exception.BookAlreadyExist;
 import org.example.projectRepository.exception.DomainException;
 import org.example.projectRepository.user.model.User;
 import org.example.projectRepository.web.dto.BookAuthorRequest;
@@ -12,6 +13,7 @@ import org.example.projectRepository.web.dto.BookEditRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -41,7 +43,7 @@ public class BookService {
                 .orElseThrow(() -> new DomainException("Author not found"));
 
         if (bookRepository.findByTitleAndAuthor(bookAuthorRequest.getTitle(), author).isPresent()) {
-            throw new DomainException("Book with this title and author already exists");
+            throw new BookAlreadyExist("Book with this title and author already exists");
         }
 
         Book book = Book.builder()
@@ -75,14 +77,11 @@ public class BookService {
     }
 
     @Transactional
-    @Modifying
-    @Query("DELETE FROM Book b WHERE b.id = :id")
-    public void deleteBookById(UUID id) {
 
-        bookRepository.findById(id).orElseThrow(() -> new DomainException("Book not found"));
-        bookRepository.deleteById(id);
+    public void deleteBookById( UUID id) {
 
-
+        Book book = bookRepository.findById(id).orElseThrow(() -> new DomainException("Book not found"));
+        bookRepository.deleteById(book.getId());
     }
 
 

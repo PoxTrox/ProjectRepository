@@ -48,7 +48,6 @@ public class BookController {
 
         List<Book> sortedList = bookService.returnAllBooksSorted(user, sortField, sortDirection);
 
-
         mav.addObject("user", user);
         mav.addObject("books", sortedList);
         mav.setViewName("books");
@@ -81,7 +80,7 @@ public class BookController {
         return "redirect:/books/get";
     }
 
-    @DeleteMapping("/{id}/delete")
+    @PostMapping("/{id}/delete")
     public String deleteBook(@PathVariable UUID id) {
         bookService.deleteBookById(id);
         return "redirect:/books/get";

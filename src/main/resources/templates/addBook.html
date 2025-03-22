@@ -16,6 +16,7 @@
     <label for="bookTitle">Book Title</label>
     <input type="text" name="bookTitle" id="bookTitle" th:field="*{title}" required></input>
     <p class="alert-warning" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+    <p class="alert"  th:text="${alreadyExist}"></p>
 
     <label for="price">Price</label>
     <input type="text" name="price" id="price" th:field="*{price}" required></input>

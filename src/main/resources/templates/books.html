@@ -11,7 +11,7 @@
 <body>
 
 <nav class="navbar">
-    <form>
+
         <ul>
             <li>
                 <a th:href="@{/home}" class="btn">Go Back</a>
@@ -57,14 +57,12 @@
                     </td>
                     <td>
                         <form th:action="@{'/books/' + ${book.id} + '/delete'}" method="POST">
-                            <input type="hidden" name="_method" value="delete"/>
-                            <input type="submit" value="Delete"/>
+                            <button type="submit">Delete</button>
                         </form>
                     </td>
                 </tr>
             </table>
         </div>
-    </form>
 
 </nav>
 <footer class="footer">

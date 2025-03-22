@@ -41,6 +41,10 @@ public class MediaService {
         if(currenUser == null) {
             throw new DomainException("User not found");
         }
+
+        if(mediaRepository.findByTitleAndMediaTypeAndReleaseDate(mediaTvshowRequest.getTitle(), mediaTvshowRequest.getMediaType(), LocalDate.parse(mediaTvshowRequest.getReleaseDate())).isEmpty()) {
+            throw new DomainException("Media already exists");
+        }
         LocalDateTime now = LocalDateTime.now();
         Media media = Media.builder()
                 .title(mediaTvshowRequest.getTitle())

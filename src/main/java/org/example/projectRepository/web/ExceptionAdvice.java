@@ -1,5 +1,6 @@
 package org.example.projectRepository.web;
 
+import org.example.projectRepository.exception.BookAlreadyExist;
 import org.example.projectRepository.exception.UserNameAlreadyExistException;
 import org.example.projectRepository.exception.UserWithGivenNameDoesNotExist;
 import org.example.projectRepository.exception.UserWithIdDoesNotExist;
@@ -23,6 +24,13 @@ public class ExceptionAdvice {
 
         return "redirect:/register";
     }
+
+    @ExceptionHandler(BookAlreadyExist.class)
+    public String handlerBookAlreadyExist(RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("alreadyExist", "Book already exist");
+        return "redirect:/books/add";
+    }
+
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({UserWithGivenNameDoesNotExist.class,
