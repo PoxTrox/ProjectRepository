@@ -52,8 +52,7 @@ public class ExceptionAdvice {
     })
     public ModelAndView handleNotFound(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("404NotFound");
-        return modelAndView;
+        return new ModelAndView("404NotFound");
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

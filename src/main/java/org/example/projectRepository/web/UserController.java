@@ -34,9 +34,6 @@ public class UserController {
     @GetMapping("/{id}/profile")
     public ModelAndView profilePage (@PathVariable UUID id) {
 
-
-
-
         ModelAndView modelAndView = new ModelAndView();
         User user = userService.getById(id);
         modelAndView.addObject("user", user);
@@ -72,6 +69,7 @@ public class UserController {
     }
 
     @PutMapping("{id}/status")
+    @PreAuthorize("hasRole('ADMIN')")
     public String changeStatusUser(@PathVariable UUID id) {
 
         userService.changeStatus(id);
@@ -79,6 +77,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}/role")
+    @PreAuthorize("hasRole('ADMIN')")
     public String updateProfileRole(@PathVariable UUID id) {
 
         userService.changeUserRole(id);
@@ -88,6 +87,7 @@ public class UserController {
     }
 
     @GetMapping("{id}/getWishList")
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView getWishList(@PathVariable UUID id) {
         ModelAndView modelAndView = new ModelAndView();
         User user = userService.getById(id);

@@ -3,6 +3,7 @@ package org.example.projectRepository.wishList;
 
 import org.assertj.core.api.Assertions;
 import org.example.projectRepository.exception.DomainException;
+import org.example.projectRepository.exception.WishListItemAlreadyExist;
 import org.example.projectRepository.user.model.User;
 import org.example.projectRepository.user.service.UserService;
 import org.example.projectRepository.web.dto.WishListEditRequest;
@@ -100,7 +101,7 @@ public class WishListUTest {
         ).thenReturn(Optional.of(existingWishlistItem));
 
 
-        assertThrows(DomainException.class, () -> {
+        assertThrows(WishListItemAlreadyExist.class, () -> {
             wishListService.saveItemToWishlist(wishListRequest, user);
         });
 
