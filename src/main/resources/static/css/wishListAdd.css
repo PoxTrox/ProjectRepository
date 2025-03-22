@@ -45,6 +45,10 @@ button{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 22px;
 }
+.alert{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 22px;
+}
 
 footer{
     color: rgba(113, 156, 64, 0.69);

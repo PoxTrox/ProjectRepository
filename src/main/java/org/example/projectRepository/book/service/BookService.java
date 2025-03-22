@@ -43,7 +43,7 @@ public class BookService {
                 .orElseThrow(() -> new DomainException("Author not found"));
 
         if (bookRepository.findByTitleAndAuthor(bookAuthorRequest.getTitle(), author).isPresent()) {
-            throw new BookAlreadyExist("Book with this title and author already exists");
+            throw new BookAlreadyExist("Book with this title and author already exists !");
         }
 
         Book book = Book.builder()

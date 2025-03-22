@@ -1,6 +1,7 @@
 package org.example.projectRepository.wishList.service;
 
 import org.example.projectRepository.exception.DomainException;
+import org.example.projectRepository.exception.WishListItemAlreadyExist;
 import org.example.projectRepository.user.model.User;
 import org.example.projectRepository.user.service.UserService;
 import org.example.projectRepository.web.dto.WishListEditRequest;
@@ -36,7 +37,7 @@ public class WishListService {
 
         Optional<WishList> byTitleAndTypeEntertainment = wishlistRepository.findByTitleAndTypeEntertainment(wishListRequest.getTitle(), wishListRequest.getTypeEntertainment());
         if(byTitleAndTypeEntertainment.isPresent()) {
-            throw new DomainException("Wishlist with title " + wishListRequest.getTitle() + " already exists");
+            throw new WishListItemAlreadyExist(String.format("Item with title %s already exist", wishListRequest.getTitle()));
         }
 
         WishList newWishMedia = WishList.builder()

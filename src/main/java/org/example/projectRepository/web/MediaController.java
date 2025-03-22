@@ -58,7 +58,7 @@ public class MediaController {
         return modelAndView;
     }
 
-
+        //Media/movie/tvshow/add
     @GetMapping("/movie/tvshow/add")
     public ModelAndView addMediaPage(@AuthenticationPrincipal AuthenticationDetails details) {
 

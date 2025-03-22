@@ -1,9 +1,6 @@
 package org.example.projectRepository.web;
 
-import org.example.projectRepository.exception.BookAlreadyExist;
-import org.example.projectRepository.exception.UserNameAlreadyExistException;
-import org.example.projectRepository.exception.UserWithGivenNameDoesNotExist;
-import org.example.projectRepository.exception.UserWithIdDoesNotExist;
+import org.example.projectRepository.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,15 +17,27 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(UserNameAlreadyExistException.class)
     public String handlerUserNameAlreadyExist(RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("alreadyExist", "Username already exist");
+        redirectAttributes.addFlashAttribute("alreadyExist", "Username already exist!");
 
         return "redirect:/register";
     }
 
     @ExceptionHandler(BookAlreadyExist.class)
     public String handlerBookAlreadyExist(RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("alreadyExist", "Book already exist");
+        redirectAttributes.addFlashAttribute("alreadyExist", "Book already exist!");
         return "redirect:/books/add";
+    }
+
+    @ExceptionHandler(MediaAlreadyExist.class)
+    public String handlerMediaAlreadyExist(RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("alreadyExist", "Media already exist!");
+        return "redirect:/Media/movie/tvshow/add";
+    }
+
+    @ExceptionHandler(WishListItemAlreadyExist.class)
+    public String handlerWishListAlreadyExist(RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("alreadyExist", "WishList Item  already exist!");
+        return "redirect:/wishlist/add";
     }
 
 

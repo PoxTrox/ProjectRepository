@@ -2,6 +2,7 @@ package org.example.projectRepository.media.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.projectRepository.exception.DomainException;
+import org.example.projectRepository.exception.MediaAlreadyExist;
 import org.example.projectRepository.media.model.Media;
 import org.example.projectRepository.media.model.MediaType;
 import org.example.projectRepository.media.repository.MediaRepository;
@@ -42,8 +43,8 @@ public class MediaService {
             throw new DomainException("User not found");
         }
 
-        if(mediaRepository.findByTitleAndMediaTypeAndReleaseDate(mediaTvshowRequest.getTitle(), mediaTvshowRequest.getMediaType(), LocalDate.parse(mediaTvshowRequest.getReleaseDate())).isEmpty()) {
-            throw new DomainException("Media already exists");
+        if(mediaRepository.findByTitleAndMediaTypeAndReleaseDate(mediaTvshowRequest.getTitle(), mediaTvshowRequest.getMediaType(), LocalDate.parse(mediaTvshowRequest.getReleaseDate())).isPresent()) {
+            throw new MediaAlreadyExist("Media already exists!");
         }
         LocalDateTime now = LocalDateTime.now();
         Media media = Media.builder()
