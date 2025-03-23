@@ -1,16 +1,15 @@
 package org.example.projectRepository.web;
 
 import org.example.projectRepository.book.service.BookService;
-import org.example.projectRepository.exception.UserNameAlreadyExistException;
 import org.example.projectRepository.media.Service.MediaService;
 import org.example.projectRepository.search.SearchClient;
 import org.example.projectRepository.security.AuthenticationDetails;
-import org.example.projectRepository.user.model.User;
 import org.example.projectRepository.user.model.UserRole;
 import org.example.projectRepository.user.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -28,11 +27,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @WebMvcTest(indexController.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class IndexControllerApiTest {
 
     @Autowired
     private MockMvc mockMvc;
-
 
     @MockitoBean
     private UserService userService;

@@ -13,15 +13,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
-import static org.example.projectRepository.TestBuilder.aMockUser;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -32,6 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(UserController.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class UserControllerApiTest {
 
     @MockitoBean
@@ -233,26 +233,64 @@ public class UserControllerApiTest {
         AuthenticationDetails authenticationUser = new AuthenticationDetails(uuid
                 , "user123", "123123", UserRole.ADMIN, true);
 
-        ProfileEditRequest profileEditRequest = ProfileEditRequest.builder()
+        User user = User.builder()
+                .isActive(true)
+                .age(18)
+                .username("user123")
+                .role(UserRole.USER)
+                .id(uuid)
+                .build();
+
+        ProfileEditRequest profileEditRequest = ProfileEditRequest.builder().age(19)
                 .firstName("John")
                 .lastName("Doe")
-                .age(18).build();
+                .age(19)
+                .build();
 
-        when(userService.getById(any())).thenReturn(aMockUser());
-     //   when(DtoMapper.mapToProfileEditRequest(aMockUser())).thenReturn(profileEditRequest);
-    //    userService.editProfileUser(uuid, profileEditRequest);
-        mockStatic(DtoMapper.class).when(() -> DtoMapper.mapToProfileEditRequest(aMockUser()))
-                .thenReturn(profileEditRequest);
+        doNothing().when(userService).editProfileUser(eq(uuid), any(ProfileEditRequest.class));
+
+        MockHttpServletRequestBuilder request = put("/users/{id}/profile", uuid)
+                .with(user(authenticationUser))
+                .with(csrf())
+                .param("firstName", profileEditRequest.getFirstName())
+                .param("lastName", profileEditRequest.getLastName())
+                .param("age", String.valueOf(profileEditRequest.getAge()));
+
+        mockMvc.perform(request)
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/home"));
+
+        verify(userService, times(1)).editProfileUser(eq(uuid), any(ProfileEditRequest.class));
+
+    }
+    @Test
+    void getRequestToEditProfilePageWithInvalidData_shouldRedirectEditProfilePage() throws Exception {
 
 
+        UUID uuid = UUID.randomUUID();
+        AuthenticationDetails authenticationUser = new AuthenticationDetails(uuid
+                , "user123", "123123", UserRole.ADMIN, true);
 
+        User user = User.builder()
+                .isActive(true)
+                .age(18)
+                .username("user123")
+                .role(UserRole.USER)
+                .id(uuid)
+                .build();
 
-        MockHttpServletRequestBuilder request = put("/users/{id}/profile", aMockUser().getId()).with(user(authenticationUser))
-                .with(csrf());
+        when(userService.getById(uuid)).thenReturn(user);
+        MockHttpServletRequestBuilder request = put("/users/{id}/profile", uuid)
+                .with(user(authenticationUser))
+                .with(csrf())
+                .param("firstName", "")
+                .param("lastName", "")
+                .param("age", String.valueOf(-1));
 
-        mockMvc.perform(request).andExpect(status().isOk())
+        mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("user"))
                 .andExpect(view().name("editProfile"));
-                //.andExpect(model().attributeExists("profileEditRequest"));
 
 
     }
