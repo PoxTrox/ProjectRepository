@@ -46,7 +46,7 @@ public class UserController {
     public ModelAndView editProfilePage (@PathVariable UUID id, @Valid  ProfileEditRequest profileEditRequest, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) {
-            System.out.println("has some errors"+ bindingResult.getAllErrors());
+
             User user = userService.getById(id);
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.addObject("user", user);
@@ -86,7 +86,7 @@ public class UserController {
 
     }
 
-    @GetMapping("{id}/getWishList")
+    @GetMapping("/{id}/getWishList")
     @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView getWishList(@PathVariable UUID id) {
         ModelAndView modelAndView = new ModelAndView();

@@ -1,6 +1,7 @@
 package org.example.projectRepository.web;
 
 import org.example.projectRepository.book.service.BookService;
+import org.example.projectRepository.exception.UserNameAlreadyExistException;
 import org.example.projectRepository.media.Service.MediaService;
 import org.example.projectRepository.search.SearchClient;
 import org.example.projectRepository.security.AuthenticationDetails;
@@ -161,6 +162,27 @@ public class IndexControllerApiTest {
         verify(userService, never()).getById(any());
 
     }
+//
+//    @Test
+//    void postRegisterRequestWithUserNameAlreadyExist_shouldRedirectToRegister() throws Exception {
+//
+//        MockHttpServletRequestBuilder builder = post("/register")
+//                .formField("username", "admin")
+//                .formField("password", "admin123")
+//                .formField("confirmPassword", "admin123")
+//                .formField("agreeTermOfUse", "true")
+//                .with(csrf());
+//
+//        when(userService.register(any())).thenThrow( new UserNameAlreadyExistException("User name already exists"));
+//
+//        mockMvc.perform(builder)
+//                .andExpect(status().is3xxRedirection())
+//                .andExpect(flash().attribute("errorMessage", "User name already exists"))
+//              .andExpect(redirectedUrl("/register"));
+//
+//        verify(userService, times(1)).register(any());
+//
+//    }
 }
 
 
