@@ -144,7 +144,7 @@ public class UserControllerApiTest {
                 .with(user(authenticationUser))
                 .with(csrf());
 
-        // 2. Send Request
+
         mockMvc.perform(request)
                 .andExpect(status().isNotFound())
                 .andExpect(redirectedUrl("/404NotFound"));

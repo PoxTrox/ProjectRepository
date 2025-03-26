@@ -1,5 +1,6 @@
 package org.example.projectRepository.web;
 
+import feign.FeignException;
 import org.example.projectRepository.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -45,14 +46,17 @@ public class ExceptionAdvice {
     @ExceptionHandler({UserWithGivenNameDoesNotExist.class,
             AccessDeniedException.class,
             MethodArgumentTypeMismatchException.class,
+            FeignException.Forbidden.class,
             NoResourceFoundException.class,
             UserWithIdDoesNotExist.class,
             UserWithGivenNameDoesNotExist.class
-
     })
     public ModelAndView handleNotFound(){
-        ModelAndView modelAndView = new ModelAndView();
-        return new ModelAndView("404NotFound");
+       ModelAndView modelAndView = new ModelAndView();
+
+       modelAndView.setViewName("404NotFound");
+
+        return modelAndView;
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

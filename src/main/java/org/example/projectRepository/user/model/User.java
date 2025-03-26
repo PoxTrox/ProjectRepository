@@ -16,7 +16,11 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "app_user")
+
+//Note  !!!! when run tests change this @Table to "app_user"
+////because Integration test does not run without it after that make shore you change it back to "user"
+//// or application will not work correctly i don't know what missing to fix this..
+@Table(name = "user")
 public class User {
 
     @Id

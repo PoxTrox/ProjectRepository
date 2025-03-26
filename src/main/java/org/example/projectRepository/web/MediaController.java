@@ -120,6 +120,7 @@ public class MediaController {
             modelAndView.addObject("user", user);
             return modelAndView;
         }
+
         mediaService.editMedia(id, movieTvShowEditRequest);
         return new ModelAndView("redirect:/Media/movie/tvshow");
     }

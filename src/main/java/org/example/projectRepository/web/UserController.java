@@ -9,6 +9,7 @@ import org.example.projectRepository.wishList.model.WishList;
 import org.example.projectRepository.wishList.service.WishListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -57,10 +58,10 @@ public class UserController {
         userService.editProfileUser(id, profileEditRequest);
         return new ModelAndView("redirect:/home");
     }
-
-    @GetMapping("/getAllUsers")
     @PreAuthorize("hasRole('ADMIN')")
-    public ModelAndView getAllUsers() {
+    @GetMapping("/getAllUsers")
+    public ModelAndView getAllUsers(@AuthenticationPrincipal User user) {
+
         ModelAndView modelAndView = new ModelAndView();
         List<User> users = userService.getAllUsers();
         modelAndView.addObject("users", users);

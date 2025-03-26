@@ -22,7 +22,7 @@ public class beanConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:8081") // Или друг домейн, който ползваш
+                        .allowedOrigins("http://localhost:8081")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowCredentials(true);
             }
