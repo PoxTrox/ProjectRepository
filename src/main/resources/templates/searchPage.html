@@ -13,8 +13,8 @@
     <a th:href="@{/home}">Go back</a>
 </button>
 
-<form th:action="@{/Media/search}" method="get" class="search">
-    <input type="text" name="title" placeholder="Search..by title  in TMDB database for result">
+<form th:action="@{/clientSearch/titleInRepository}"  th:method="get" class="search">
+    <input type="text" name="title" style="width: 350px"  placeholder="Deep search in DMDB">
     <button type="submit">Search</button>
 </form>
 
@@ -30,16 +30,16 @@
             <th>Save to your List</th>
             <th>Save to your wishList</th>
         </tr>
-        <tr th:each="result : ${mediaList}">
+        <tr th:each="result : ${restMediaResponses}">
             <td th:text="${result.title}"> </td>
-            <td th:text="${result.releaseDate}"> </td>
+            <td th:text="${result.release_date}"> </td>
             <td  > </td>
             <td></td>
             <td> </td>
             <td>
                 <form th:action="@{/Media/search/save}" th:method="POST">
                     <input type="hidden" name="title" th:value="${result.title}">
-                    <input type="hidden" name="releaseDate" th:value="${result.releaseDate}">
+                    <input type="hidden" name="releaseDate" th:value="${result.release_date}">
                     <button type="submit" class="btn btn-success">Save</button>
                 </form>
             </td>

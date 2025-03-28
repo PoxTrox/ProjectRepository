@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Search page result</title>
+  <link rel="stylesheet" th:href="@{/css/searchPage.css}">
+</head>
+<body>
+<button class="toGoBack">
+  <a th:href="@{/home}">Go back</a>
+</button>
+
+<form th:action="@{/clientSearch/title}" th:method="get" class="search">
+  <input type="text" th:name="title"   style="width: 350px" placeholder="Search In RestAPi_DB ">
+  <button type="submit">Search</button>
+</form>
+
+<table id="SearchResults">
+  <tr>
+    <th style="width: 600px">Title</th>
+    <th>Release_Date</th>
+    <th>overView</th>
+    <th>userScore</th>
+    <th>genre</th>
+    <th>Save to your List</th>
+    <th>Save to your wishList</th>
+  </tr>
+  <tr th:each="result: ${restMediaResponses}">
+    <td th:text="${result.title}"></td>
+    <td th:text="${result.release_date}"></td>
+    <td th:text="${result.overview}"></td>
+    <td th:text="${result.id}"></td>
+    <td></td>
+    <td>
+      <form th:action="@{/clientSearch/saveMedia}" th:method="POST">
+        <input type="hidden" name="title" th:value="${result.title}">
+        <input type="hidden" name="releaseDate" th:value="${result.release_date}">
+        <button type="submit" class="btn btn-success">Save</button>
+      </form>
+    </td>
+    <td>
+      <form th:action="@{/clientSearch/saveMediaToWishList}" th:method="POST">
+        <input type="hidden" name="title" th:value="${result.title}">
+        <input type="hidden" name="releaseDate" th:value="${result.release_date}">
+        <button type="submit" class="btn btn-success">Save</button>
+      </form>
+    </td>
+  </tr>
+  <p th:if="${#lists.isEmpty(restMediaResponses)}">No results found.</p>
+
+</table>
+
+</body>
+</html>

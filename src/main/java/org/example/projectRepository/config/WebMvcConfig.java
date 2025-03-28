@@ -24,9 +24,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
         http.authorizeHttpRequests(matchers -> matchers
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/", "/register", "/TermOfUse").permitAll()
-                        .requestMatchers("users/getAllUsers").hasRole("ADMIN")
+                        .requestMatchers("/users/getAllUsers").hasRole("ADMIN")
                         .anyRequest().authenticated()
-                )
+                ).exceptionHandling(ex -> ex
+                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+                            response.sendRedirect(("404NotFound"));
+                        }))
+
                 .formLogin(form -> form.
                         loginPage("/login")
 //                        .usernameParameter("username")

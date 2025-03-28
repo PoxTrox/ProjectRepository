@@ -35,5 +35,7 @@ public interface WishlistRepository extends JpaRepository <WishList, UUID> {
 
     Optional<WishList> findByTitleAndTypeEntertainment(String title, TypeEntertainment type);
 
+    Optional<WishList> findByTitle(String title);
+
 
 }

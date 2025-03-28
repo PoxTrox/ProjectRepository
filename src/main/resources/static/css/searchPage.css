@@ -53,5 +53,8 @@ table{
     text-decoration: none;
 }
 .search button{
+    position: fixed;
+    top: 10%;
+    left: 58%;
     padding: 10px;
 }

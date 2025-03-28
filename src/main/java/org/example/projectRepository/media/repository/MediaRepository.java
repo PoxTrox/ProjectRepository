@@ -1,9 +1,11 @@
 package org.example.projectRepository.media.repository;
 
+import jakarta.persistence.LockModeType;
 import org.example.projectRepository.media.model.Media;
 import org.example.projectRepository.media.model.MediaType;
 import org.example.projectRepository.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -35,8 +37,8 @@ public interface MediaRepository extends JpaRepository<Media, UUID> {
     List<Media>findAllByUserOrderByCreationAtDesc(User user);
 
 
+    List<Media> findAllByUserAndTitle(User user, String title);
 
-
-
-
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    Optional<Media> findByTitle(String title);
 }

@@ -2,6 +2,7 @@ package org.example.projectRepository.wishList.service;
 
 import org.example.projectRepository.exception.DomainException;
 import org.example.projectRepository.exception.WishListItemAlreadyExist;
+import org.example.projectRepository.media.model.Media;
 import org.example.projectRepository.user.model.User;
 import org.example.projectRepository.user.service.UserService;
 import org.example.projectRepository.web.dto.WishListEditRequest;
@@ -110,6 +111,23 @@ public class WishListService {
             throw new DomainException("Wishlist with title " + title + " not found");
         }
         return byTitleAndTypeEntertainment.get();
+    }
+
+    public void saveMediaFromRest(Media restMediaRequest, User user) {
+
+        User user1 = userService.getById(user.getId());
+
+        Optional<WishList> byTitleAndTypeEntertainment = wishlistRepository.findByTitle(restMediaRequest.getTitle());
+        if(byTitleAndTypeEntertainment.isEmpty()) {
+            WishList wishList = WishList.builder()
+                    .title(restMediaRequest.getTitle())
+                    .user(user1)
+                    .creationDate(LocalDate.now())
+                    .typeEntertainment(TypeEntertainment.TvShow)
+                    .seasons(1).completed(false).build();
+            wishlistRepository.save(wishList);
+
+        }
     }
 
 }

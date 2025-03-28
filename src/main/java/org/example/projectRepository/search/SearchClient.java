@@ -20,8 +20,14 @@ public interface SearchClient {
 //@GetMapping
 // ResponseEntity<Media>searchAndSaveMedia(@RequestParam (name="title")String title);
 
+ @GetMapping("/search")
+ List<RestMediaResponse> searchMovies(@RequestParam (name = "title") String title);
+
  @GetMapping
  List<Media> searchAndSaveMedia(@RequestParam (name="title")String title);
+
+ @GetMapping("/returnAllByTitle")
+ List<RestMediaResponse> returnAllByTitle(@RequestParam (name="title")String title);
 
 // @GetMapping
 // List<RestMediaResponse>searchMedia(@RequestParam (name="title")String title);

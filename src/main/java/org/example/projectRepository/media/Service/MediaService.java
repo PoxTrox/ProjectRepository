@@ -123,4 +123,20 @@ public class MediaService {
 
         return mediaRepository.findAllByUserOrderByCreationAtDesc(user);
     }
+
+    public List<Media> returnAllMediaByTitle(User user, String title) {
+        return mediaRepository.findAllByUserAndTitle(user, title);
+    }
+
+    @Transactional
+    public void saveListMediaFromRest(List<Media> fetchedMedia) {
+
+        for (Media media : fetchedMedia) {
+            Optional<Media> byTitle = mediaRepository.findByTitle(media.getTitle());
+            if (byTitle.isEmpty()) {
+                mediaRepository.saveAndFlush(media);
+            }
+        }
+
+    }
 }
