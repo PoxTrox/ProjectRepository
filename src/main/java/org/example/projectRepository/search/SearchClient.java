@@ -17,29 +17,22 @@ public interface SearchClient {
  ResponseEntity<String> getMessage(@RequestParam (name="name") String name);
 
 
-//@GetMapping
-// ResponseEntity<Media>searchAndSaveMedia(@RequestParam (name="title")String title);
-
  @GetMapping("/search")
- List<RestMediaResponse> searchMovies(@RequestParam (name = "title") String title);
+ ResponseEntity <List<RestMediaResponse>> searchMovies(@RequestParam (name = "title") String title);
 
  @GetMapping
- List<Media> searchAndSaveMedia(@RequestParam (name="title")String title);
+ ResponseEntity< List<Media>> searchAndSaveMedia(@RequestParam (name="title")String title);
 
  @GetMapping("/returnAllByTitle")
- List<RestMediaResponse> returnAllByTitle(@RequestParam (name="title")String title);
+  ResponseEntity<List<RestMediaResponse>>   returnAllByTitle(@RequestParam (name="title")String title);
 
-// @GetMapping
-// List<RestMediaResponse>searchMedia(@RequestParam (name="title")String title);
 
  @GetMapping()
  List<RestMediaResponse>returnMovies(@RequestParam (name="title")String title);
 
-// @PostMapping
-// List<RestMediaResponse> returnMediaByTitle(@RequestParam (name="title")String title);
 
  @PostMapping("/title")
- Media mediaByTitleAndReleaseDate(@RequestParam (name="title")String title,@RequestParam (name="releaseDate")String releaseDate);
+ ResponseEntity<Media>  mediaByTitleAndReleaseDate(@RequestParam (name="title")String title,@RequestParam (name="releaseDate")String releaseDate);
 
 
 

@@ -10,6 +10,8 @@ import org.example.projectRepository.user.model.User;
 import org.example.projectRepository.user.service.UserService;
 import org.example.projectRepository.web.dto.RestMediaRequest;
 import org.example.projectRepository.wishList.service.WishListService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/clientSearch")
@@ -58,9 +61,12 @@ public class SearchController {
     public ModelAndView searchByTitleInRepository(@AuthenticationPrincipal AuthenticationDetails details,  @RequestParam(name = "title") String title) {
         ModelAndView modelAndView = new ModelAndView("searchPage");
         User user = userService.getById(details.getUserId());
-        List<RestMediaResponse> restMediaResponses = searchClient.searchMovies(title);
+     //   List<RestMediaResponse> restMediaResponses = searchClient.searchMovies(title);
+      //  ResponseEntity<List<RestMediaResponse>> response = searchClient.searchMovies(title);
+        List<RestMediaResponse> restMediaResponses = searchService.searchMovieByTitle(title);
 
-        System.out.println("movie found :"+restMediaResponses.size());
+
+        System.out.println("movie found :"+ restMediaResponses.size());
         modelAndView.addObject("restMediaResponses", restMediaResponses);
         modelAndView.addObject("user", user);
         return modelAndView;
@@ -70,13 +76,13 @@ public class SearchController {
     public ModelAndView searchByTitleInDtMb(@AuthenticationPrincipal AuthenticationDetails details, @RequestParam(name = "title") String title) {
         ModelAndView modelAndView = new ModelAndView("ClientSearchPage");
         User user = userService.getById(details.getUserId());
-      //  List<RestMediaResponse> MediaResponses = searchClient.searchMovies(title);
-        List<RestMediaResponse> search = searchService.search(user, title);
-        List<RestMediaResponse> restMediaResponses = searchClient.returnAllByTitle(title);
+
+        List<RestMediaResponse> search = searchService.searchPartTwo(user, title);
+
 
         System.out.println("movie found :" + search.size());
         modelAndView.addObject("mediaTvshowRequest", new RestMediaRequest());
-        modelAndView.addObject("restMediaResponses", restMediaResponses);
+        modelAndView.addObject("search", search);
         modelAndView.addObject("user", user);
         return modelAndView;
     }
@@ -86,9 +92,10 @@ public class SearchController {
 
         User user = userService.getById(details.getUserId());
 
-        Media media = searchClient.mediaByTitleAndReleaseDate(request.getTitle(), request.getReleaseDate());
 
-        mediaService.saveMediaFromRest(media,user);
+        Media media1 = searchService.mediaByTitleAndReleaseDate(request.getTitle(), request.getReleaseDate());
+
+        mediaService.saveMediaFromRest(media1,user);
         return new ModelAndView("redirect:/Media/movie/tvshow");
     }
 
@@ -96,9 +103,10 @@ public class SearchController {
     public ModelAndView saveMediaToWishList( RestMediaRequest request,@AuthenticationPrincipal AuthenticationDetails details) {
 
         User user = userService.getById(details.getUserId());
-        Media media = searchClient.mediaByTitleAndReleaseDate(request.getTitle(), request.getReleaseDate());
 
-        wishListService.saveMediaFromRest(media,user);
+        Media media1 = searchService.mediaByTitleAndReleaseDate(request.getTitle(), request.getReleaseDate());
+
+        wishListService.saveMediaFromRest(media1,user);
 
 
         return new ModelAndView("redirect:/wishlist");

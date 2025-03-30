@@ -28,7 +28,7 @@
     <th>Save to your List</th>
     <th>Save to your wishList</th>
   </tr>
-  <tr th:each="result: ${restMediaResponses}">
+  <tr th:each="result: ${search}">
     <td th:text="${result.title}"></td>
     <td th:text="${result.release_date}"></td>
     <td th:text="${result.overview}"></td>
