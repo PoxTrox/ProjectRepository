@@ -30,15 +30,16 @@
             <li th:if="${user.role.name == 'ADMIN'}">
                 <a th:href="@{/users/getAllUsers}"> Users</a>
             </li>
-            <li>
-                <a th:href="@{/logout}" class="btn">Logout</a>
 
-            </li>
             <li>
-                <a th:href="@{/clientSearch/Dmdb}" class="btn"> search in DTDB</a>
+                <a th:href="@{/clientSearch/Dmdb}" class="btn"> search in DMDB</a>
             </li>
             <li>
                 <a th:href="@{/clientSearch}" class="btn"> search in Repository </a>
+            </li>
+            <li>
+                <a th:href="@{/logout}" class="btn">Logout</a>
+
             </li>
 
         </ul>

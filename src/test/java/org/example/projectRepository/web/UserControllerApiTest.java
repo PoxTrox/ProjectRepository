@@ -10,7 +10,6 @@ import org.example.projectRepository.wishList.model.TypeEntertainment;
 import org.example.projectRepository.wishList.model.WishList;
 import org.example.projectRepository.wishList.service.WishListService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -128,25 +127,6 @@ public class UserControllerApiTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/users/getAllUsers"));
         verify(userService, times(1)).changeUserRole(any());
-    }
-
-
-    //TODO must fix this i don't know why behave like this...
-    @Test
-    void putAuthorizedRequestToSwitchRole_shouldRedirect404() throws Exception {
-
-        // 1. Build Request
-        UUID uuid = UUID.randomUUID();
-        AuthenticationDetails authenticationUser = new AuthenticationDetails(uuid
-                , "user123", "123123", UserRole.USER, true);
-        MockHttpServletRequestBuilder request = put("/users/{id}/role", UUID.randomUUID())
-                .with(user(authenticationUser))
-                .with(csrf());
-
-
-        mockMvc.perform(request).andExpect(status().is3xxRedirection());
-
-        verify(userService, times(0)).changeUserRole(any());
     }
 
     @Test

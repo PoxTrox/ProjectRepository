@@ -37,19 +37,21 @@
             <td></td>
             <td> </td>
             <td>
-                <form th:action="@{/Media/search/save}" th:method="POST">
+                <form th:action="@{/clientSearch/saveMedia}" th:method="POST">
                     <input type="hidden" name="title" th:value="${result.title}">
                     <input type="hidden" name="releaseDate" th:value="${result.release_date}">
                     <button type="submit" class="btn btn-success">Save</button>
                 </form>
             </td>
             <td>
-                <a th:href="@{#}">save to media</a>
+                <form th:action="@{/clientSearch/saveMediaToWishList}" th:method="POST">
+                    <input type="hidden" name="title" th:value="${result.title}">
+                    <input type="hidden" name="releaseDate" th:value="${result.release_date}">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </form>
             </td>
         </tr>
     </table>
-
-
 
 </form>
 

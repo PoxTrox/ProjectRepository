@@ -132,48 +132,4 @@ public class MediaController {
         return "redirect:/Media/movie/tvshow";
     }
 
-
-//    @GetMapping()
-//    public ModelAndView search(@AuthenticationPrincipal AuthenticationDetails authenticationDetails) {
-//        List<Media> mediaList = new ArrayList<>();
-//        ModelAndView modelAndView = new ModelAndView();
-//        User user = userService.getById(authenticationDetails.getUserId());
-//        modelAndView.addObject("user", user);
-//        modelAndView.addObject("mediaList", mediaList);
-//        modelAndView.addObject("mediaTvshowRequest", new RestMediaRequest());
-//        modelAndView.setViewName("searchPage");
-//        return modelAndView;
-//    }
-//
-//    @GetMapping("/search")
-//    public ModelAndView searchResult(@AuthenticationPrincipal AuthenticationDetails authenticationDetails
-//            , @RequestParam(name = "title") String title) {
-//        List<Media> mediaList = searchClient.searchAndSaveMedia(title);
-//        ModelAndView modelAndView = new ModelAndView();
-//        User user = userService.getById(authenticationDetails.getUserId());
-//        modelAndView.addObject("user", user);
-//        modelAndView.addObject("mediaList", mediaList);
-//        modelAndView.setViewName("searchPage");
-//        return modelAndView;
-//    }
-//
-//    @PostMapping("/search/save")
-//    public ModelAndView saveMediaByTitle(RestMediaRequest request, @AuthenticationPrincipal AuthenticationDetails authenticationDetails) {
-//
-//        try {
-//            Media media = searchClient.mediaByTitleAndReleaseDate(request.getTitle(), request.getReleaseDate());
-//
-//            User user = userService.getById(authenticationDetails.getUserId());
-//
-//
-//            mediaService.saveMediaFromRest(media, user);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return new ModelAndView("redirect:/Media/movie/tvshow");
-//
-//    }
-
-
 }

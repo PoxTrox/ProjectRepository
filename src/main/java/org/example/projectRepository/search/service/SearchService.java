@@ -35,7 +35,7 @@ public class SearchService {
     }
 
     @Transactional
-    public List<RestMediaResponse> searchPartTwo ( User user,  String title) {
+    public List<RestMediaResponse> search(User user, String title) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Pattern pattern = Pattern.compile(title, Pattern.CASE_INSENSITIVE);

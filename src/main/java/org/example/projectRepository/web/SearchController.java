@@ -10,8 +10,6 @@ import org.example.projectRepository.user.model.User;
 import org.example.projectRepository.user.service.UserService;
 import org.example.projectRepository.web.dto.RestMediaRequest;
 import org.example.projectRepository.wishList.service.WishListService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/clientSearch")
@@ -77,7 +74,7 @@ public class SearchController {
         ModelAndView modelAndView = new ModelAndView("ClientSearchPage");
         User user = userService.getById(details.getUserId());
 
-        List<RestMediaResponse> search = searchService.searchPartTwo(user, title);
+        List<RestMediaResponse> search = searchService.search(user, title);
 
 
         System.out.println("movie found :" + search.size());
@@ -107,7 +104,6 @@ public class SearchController {
         Media media1 = searchService.mediaByTitleAndReleaseDate(request.getTitle(), request.getReleaseDate());
 
         wishListService.saveMediaFromRest(media1,user);
-
 
         return new ModelAndView("redirect:/wishlist");
     }
