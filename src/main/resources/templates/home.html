@@ -31,9 +31,9 @@
                 <a th:href="@{/users/getAllUsers}"> Users</a>
             </li>
 
-            <li>
-                <a th:href="@{/clientSearch/Dmdb}" class="btn"> search in DMDB</a>
-            </li>
+            <!--  <li>
+                     <a th:href="@{/clientSearch/Dmdb}" class="btn"> search in DMDB</a>
+            </li>-->
             <li>
                 <a th:href="@{/clientSearch}" class="btn"> search in Repository </a>
             </li>
@@ -62,19 +62,23 @@
 </div>
 <div class="details-section-container">
 
-    <h3 th:text="${'First name :' + user.getFirstName()}"></h3>
+        <p th:text="'First name : '+  ${#strings.isEmpty(user.getFirstName()) ? '--------- ': user.getFirstName()}"></p>
 </div>
 <div class="details-section-container">
-    <h3 th:text="${'Last name :'+user.getLastName()}"></h3>
+
+    <p th:text="'Last name  : '+  ${#strings.isEmpty(user.lastName) ? '--------- ': user.lastName}"></p>
 </div>
 <div class="details-section-container">
-    <h3 th:text="${'Email address :'+  user.email}"></h3>
+
+    <p th:text="'Email address : '+  ${#strings.isEmpty(user.getEmail()) ? '--------- ': user.getEmail()}"></p>
 </div>
 <div class="details-section-container">
-    <h3 th:text="${' Your age : '+ user.age}"></h3>
+
+    <p th:text="'Age  : '+  ${#strings.isEmpty(user.getAge()) ? '--------- ': user.getAge()}"></p>
 </div>
 <div class="details-section-container">
-    <h3 th:text="${'Country you live in : '+ user.country}"></h3>
+
+    <p th:text="'Email address : '+  ${#strings.isEmpty(user.getCountry()) ? '--------- ': user.getCountry()}"></p>
 </div>
 <h2 id="HomeH2Title">Last Added Item - Media </h2>
 
@@ -85,7 +89,7 @@
             <th style="width: 333px">Title</th>
             <th style="width: 150px">Genre</th>
             <th style="width: 69px">Seasons</th>
-            <th>Realise_Date</th>
+            <th>Release_date</th>
         </tr>
         <tr th:each="iter, stats : ${media}" th:if="${stats.count==1}">
             <td th:text="${iter.mediaType}"></td>

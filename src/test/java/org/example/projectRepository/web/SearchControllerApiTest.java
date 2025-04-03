@@ -75,31 +75,31 @@ public class SearchControllerApiTest {
                 .andExpect(status().isOk());
 
     }
-    @Test
-    void getRequestToSearchDTMB_shouldReturnCorrectPage() throws Exception {
-
-        UUID userId = UUID.randomUUID();
-        User user = User.builder()
-                .isActive(true)
-                .age(18)
-                .username("user123")
-                .role(UserRole.USER)
-                .id(userId)
-                .build();
-
-        UUID uuid = UUID.randomUUID();
-        AuthenticationDetails authenticationUser = new AuthenticationDetails(uuid
-                , "user123", "123123", UserRole.ADMIN, true);
-
-        when(userService.getById(any())).thenReturn(user);
-
-        MockHttpServletRequestBuilder builder = get("/clientSearch/Dmdb").with(user(authenticationUser)).with(csrf());
-
-        mockMvc.perform(builder)
-                .andExpect(view().name("searchPage"))
-                .andExpect(model().attributeExists("user"))
-                .andExpect(status().isOk());
-    }
+//    @Test
+//    void getRequestToSearchDTMB_shouldReturnCorrectPage() throws Exception {
+//
+//        UUID userId = UUID.randomUUID();
+//        User user = User.builder()
+//                .isActive(true)
+//                .age(18)
+//                .username("user123")
+//                .role(UserRole.USER)
+//                .id(userId)
+//                .build();
+//
+//        UUID uuid = UUID.randomUUID();
+//        AuthenticationDetails authenticationUser = new AuthenticationDetails(uuid
+//                , "user123", "123123", UserRole.ADMIN, true);
+//
+//        when(userService.getById(any())).thenReturn(user);
+//
+//        MockHttpServletRequestBuilder builder = get("/clientSearch/Dmdb").with(user(authenticationUser)).with(csrf());
+//
+//        mockMvc.perform(builder)
+//                .andExpect(view().name("searchPage"))
+//                .andExpect(model().attributeExists("user"))
+//                .andExpect(status().isOk());
+//    }
 
     @Test
     void getRequestToSearchByTitleInRepository_shouldReturnCorrectPage() throws Exception {

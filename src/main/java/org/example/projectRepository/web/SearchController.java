@@ -45,21 +45,19 @@ public class SearchController {
         modelAndView.addObject("user", user);
         return modelAndView;
     }
-
-    @GetMapping("/Dmdb")
-    public ModelAndView searchInDMDB(@AuthenticationPrincipal AuthenticationDetails details) {
-        ModelAndView modelAndView = new ModelAndView("searchPage");
-        User user = userService.getById(details.getUserId());
-        modelAndView.addObject("user", user);
-        return modelAndView;
-    }
+        //TODO In future
+//    @GetMapping("/Dmdb")
+//    public ModelAndView searchInDMDB(@AuthenticationPrincipal AuthenticationDetails details) {
+//        ModelAndView modelAndView = new ModelAndView("searchPage");
+//        User user = userService.getById(details.getUserId());
+//        modelAndView.addObject("user", user);
+//        return modelAndView;
+//    }
 
     @GetMapping("/titleInRepository")
     public ModelAndView searchByTitleInRepository(@AuthenticationPrincipal AuthenticationDetails details,  @RequestParam(name = "title") String title) {
         ModelAndView modelAndView = new ModelAndView("searchPage");
         User user = userService.getById(details.getUserId());
-     //   List<RestMediaResponse> restMediaResponses = searchClient.searchMovies(title);
-      //  ResponseEntity<List<RestMediaResponse>> response = searchClient.searchMovies(title);
         List<RestMediaResponse> restMediaResponses = searchService.searchMovieByTitle(title);
 
 
